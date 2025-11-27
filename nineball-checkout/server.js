@@ -1,60 +1,74 @@
 // server.js
-import express from "express";
-import bodyParser from "body-parser";
-import cors from "cors";
-import dotenv from "dotenv";
-import { SumUp } from "sumup-ts";
-
-dotenv.config();
+const express = require('express');
+const bodyParser = require('body-parser');
+const cors = require('cors');
+require('dotenv').config();
+const Stripe = require('stripe');
 
 const app = express();
-app.use(cors());
+
+// In production, set your exact domain:
+// app.use(cors({ origin: "https://yourdomain.com" }));
+app.use(cors({ origin: true }));
 app.use(bodyParser.json());
 
 const PORT = process.env.PORT || 3000;
 
-// Initialize SumUp SDK
-const sumup = new SumUp({
-  clientId: process.env.SUMUP_CLIENT_ID,
-  clientSecret: process.env.SUMUP_CLIENT_SECRET,
-  redirectUri: process.env.SUMUP_REDIRECT_URI,
-  sandbox: true, // change to false in production
-});
+if (!process.env.STRIPE_SECRET_KEY) {
+  console.error("ERROR: Missing STRIPE_SECRET_KEY in .env file.");
+  process.exit(1);
+}
 
-// Endpoint to create checkout
-app.post("/api/create-checkout", async (req, res) => {
+const stripe = Stripe(process.env.STRIPE_SECRET_KEY);
+
+// =======================
+// CREATE CHECKOUT SESSION
+// =======================
+app.post('/api/create-checkout', async (req, res) => {
   try {
-    const { total, currency, customerName } = req.body;
+    const { total, customerEmail, metadata } = req.body;
 
-    if (!total || !currency || !customerName) {
-      return res.status(400).json({ error: "Missing required fields" });
+    if (!customerEmail) {
+      return res.status(400).json({ error: "Missing customerEmail" });
+    }
+    if (typeof total !== "number" && typeof total !== "string") {
+      return res.status(400).json({ error: "Invalid or missing total" });
     }
 
-    // Get access token
-    const tokenData = await sumup.auth.clientCredentials.getToken();
-    const accessToken = tokenData.access_token;
+    const amount = Math.round(Number(total) * 100);
+    if (isNaN(amount) || amount <= 0) {
+      return res.status(400).json({ error: "Total must be greater than 0" });
+    }
 
-    const checkoutRequest = {
-      amount: Number(total),
-      currency,
-      pay_to_email: process.env.SUMUP_BUSINESS_EMAIL,
-      description: `Order from ${customerName}`,
-      tracking_id: `order_${Date.now()}`,
-      return_url: "http://localhost:3000/success",
-    };
+    const session = await stripe.checkout.sessions.create({
+      mode: "payment",
+      customer_email: customerEmail,
+      payment_method_types: ["card"],
+      line_items: [
+        {
+          price_data: {
+            currency: "gbp",
+            product_data: {
+              name: "Nine Ball Order"
+            },
+            unit_amount: amount,
+          },
+          quantity: 1,
+        },
+      ],
+      metadata: metadata || {},
+      success_url: process.env.SUCCESS_URL,
+      cancel_url: process.env.CANCEL_URL
+    });
 
-    const checkout = await sumup.checkout.create(checkoutRequest, accessToken);
+    res.json({ url: session.url });
 
-    res.json({ checkoutUrl: checkout.checkout_url });
-  } catch (err) {
-    console.error("Error creating SumUp checkout:", err);
-    res.status(500).json({ error: "Failed to create SumUp checkout" });
+  } catch (error) {
+    console.error("Stripe Checkout Error:", error);
+    res.status(500).json({ error: "Failed to create Stripe session" });
   }
 });
 
-// Optional: success page
-app.get("/success", (req, res) => {
-  res.send("Payment successful! Thank you for your order.");
-});
-
-app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`));
+app.listen(PORT, () =>
+  console.log(`Server running → http://localhost:${PORT}`)
+);

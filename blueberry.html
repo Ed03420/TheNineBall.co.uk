@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <link rel="stylesheet" href="global.css">
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Blueberry Balm - The Nine Ball Shop</title>
@@ -24,7 +26,21 @@ main { max-width:980px; margin:0 auto; padding:2rem 1rem; display:flex; gap:2rem
 .product-details p.features { margin-bottom:1.25rem; color:#d8d8d8; font-size:0.98rem; }
 .price { font-size:1.25rem; font-weight:700; color:#c7a86c; margin-bottom:1rem; }
 .size-select { padding:0.6rem 0.75rem; border-radius:8px; margin-bottom:1rem; background:#111; color:#fff; border:1px solid #2a2a2a; font-weight:700; cursor:pointer; }
-.cta-row { display:flex; gap:0.75rem; align-items:center; flex-wrap:wrap; }
+.cta-row {
+  display: flex;
+  flex-wrap: wrap; /* allows stacking on small screens */
+  align-items: center; /* vertical alignment */
+  gap: 0.75rem; /* consistent spacing */
+}
+
+.add-to-cart {
+  flex: 1 1 auto; /* grow to available space if needed */
+  text-align: center;
+}
+
+.back-to-shop {
+  flex: 0 0 auto; /* keeps natural width */
+}
 .add-to-cart { background:#c7a86c; color:#000; border:none; padding:0.85rem 1.25rem; border-radius:10px; font-weight:800; cursor:pointer; transition: all 0.18s ease; }
 .add-to-cart:hover { transform:translateY(-2px); }
 .back-to-shop { display:inline-block; background:transparent; color:#c7a86c; border:1px solid #2b2b2b; padding:0.6rem 1rem; border-radius:10px; font-weight:700; text-decoration:none; }
@@ -46,9 +62,119 @@ main { max-width:980px; margin:0 auto; padding:2rem 1rem; display:flex; gap:2rem
 #checkoutBtn { background:#c7a86c; color:#000; border:none; padding:0.8rem 1.2rem; border-radius:8px; font-weight:700; cursor:pointer; transition: all 0.3s ease; }
 #checkoutBtn:hover { background:#fff; color:#c7a86c; box-shadow:0 4px 12px rgba(199,168,108,0.4); transform:scale(1.05); }
 footer { text-align:center; padding:2rem 1rem; background:#000; border-top:1px solid rgba(255,255,255,0.04); color:#bbb; margin-top:2rem; }
+
+/* ===== GLOBAL RESPONSIVE STYLES ===== */
+html, body {
+  max-width: 100%;
+  overflow-x: hidden; /* prevents horizontal scroll */
+}
+
+/* Make images responsive */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Flexible grid for products and other content */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  justify-items: center;
+}
+
+/* Flex layout adjustments */
+.centered-header,
+.nav-links,
+.contact-info-footer,
+.cart-item-controls {
+  flex-wrap: wrap;
+}
+
+/* ===== HEADER & NAVIGATION ===== */
+.menu-toggle {
+  display: none;
+}
+
+.nav-links {
+  flex-direction: row;
+  gap: 1rem;
+}
+
+@media (max-width: 1024px) {
+  /* Tablet and small laptops */
+  .nav-links { 
+    flex-direction: row;
+    gap: 0.8rem;
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 800px) {
+  /* Mobile */
+  .menu-toggle { display: block; }
+
+  .nav-links {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 1rem;
+    background: rgba(0,0,0,0.95);
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    flex-direction: column;
+    gap: 0.5rem;
+    width: 200px;
+    z-index: 10000;
+  }
+
+  .nav-links.show {
+    display: flex;
+  }
+
+  .brand img {
+    height: 70px;
+  }
+
+  body {
+    padding-top: 120px;
+  }
+}
+
+/* Hero section scaling */
+.hero {
+  height: 70vh; /* shorter on mobile */
+  background-position: center center;
+  background-size: cover;
+}
+
+.hero-content h1 {
+  font-size: clamp(1.5rem, 6vw, 3rem); /* scales with screen */
+}
+
+.hero-content p {
+  font-size: clamp(0.9rem, 3vw, 1.2rem);
+}
+
+/* Cart panel on mobile */
+#cartPanel {
+  width: 90%;
+  max-width: 350px;
+}
+
+/* Buttons scaling */
+button, .notify-btn, .add-to-cart {
+  padding: clamp(0.5rem, 2vw, 0.85rem) clamp(1rem, 4vw, 1.5rem);
+  font-size: clamp(0.8rem, 2.5vw, 1rem);
+}
+
 </style>
+
 </head>
 <body>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
 <header>
   <div class="centered-header">
     <a href="index.html" class="brand">
@@ -167,6 +293,14 @@ document.getElementById('addToCartBtn').addEventListener('click',()=>{
 });
 updateCartCount();
 renderCart();
+
+const menuToggle = document.getElementById('menuToggle');
+const navLinks = document.getElementById('navLinks');
+
+menuToggle.addEventListener('click', () => {
+  navLinks.classList.toggle('show');
+});
+
 </script>
 </body>
 </html>

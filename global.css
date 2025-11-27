@@ -1,0 +1,110 @@
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Global Scaling */
+html {
+  font-size: 16px;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  width: 100%;
+  overflow-x: hidden;
+}
+
+/* Images scale properly */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Containers adapt */
+.container,
+.wrapper,
+.section {
+  width: 100%;
+  max-width: 1200px;
+  margin: auto;
+  padding: 20px;
+}
+
+/* Buttons scale */
+button {
+  width: 100%;
+  padding: 12px;
+  font-size: 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+/* Text blocks */
+h1, h2, h3 {
+  line-height: 1.2;
+  margin-bottom: 15px;
+}
+
+p {
+  line-height: 1.5;
+  margin-bottom: 10px;
+}
+
+/* Flex layouts auto-stack on mobile */
+.flex {
+  display: flex;
+  gap: 20px;
+}
+
+.grid {
+  display: grid;
+  gap: 20px;
+}
+
+/* Breakpoint for screens under 768px */
+@media (max-width: 768px) {
+
+  html { font-size: 15px; }
+
+  .flex {
+    flex-direction: column;
+  }
+
+  .grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  nav ul {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  header,
+  nav,
+  footer {
+    text-align: center;
+  }
+
+  button {
+    width: 100%;
+  }
+}
+
+/* Small phones under 480px */
+@media (max-width: 480px) {
+
+  html { font-size: 14px; }
+
+  button {
+    padding: 14px;
+    font-size: 1.1rem;
+  }
+
+  .container,
+  .wrapper,
+  .section {
+    padding: 15px;
+  }
+}

@@ -46,8 +46,123 @@ main { max-width:980px; margin:0 auto; padding:2rem 1rem; display:flex; gap:2rem
 #checkoutBtn { background:#c7a86c; color:#000; border:none; padding:0.8rem 1.2rem; border-radius:8px; font-weight:700; cursor:pointer; transition: all 0.3s ease; }
 #checkoutBtn:hover { background:#fff; color:#c7a86c; box-shadow:0 4px 12px rgba(199,168,108,0.4); transform:scale(1.05); }
 footer { text-align:center; padding:2rem 1rem; background:#000; border-top:1px solid rgba(255,255,255,0.04); color:#bbb; margin-top:2rem; }
+
+/* ===== GLOBAL RESPONSIVE STYLES ===== */
+html, body {
+  max-width: 100%;
+  overflow-x: hidden; /* prevents horizontal scroll */
+}
+
+/* Make images responsive */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Flexible grid for products and other content */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  justify-items: center;
+}
+
+/* Flex layout adjustments */
+.centered-header,
+.nav-links,
+.contact-info-footer,
+.cart-item-controls {
+  flex-wrap: wrap;
+}
+
+/* ===== HEADER & NAVIGATION ===== */
+.menu-toggle {
+  display: none;
+}
+
+.nav-links {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+}
+
+/* Tablet */
+@media (max-width: 1024px) {
+  .nav-links { 
+    gap: 0.8rem;
+    font-size: 0.95rem;
+  }
+}
+
+/* Mobile */
+@media (max-width: 800px) {
+
+  .menu-toggle { 
+    display: block; 
+  }
+
+  .nav-links {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 1rem;
+    background: rgba(0,0,0,0.95);
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    flex-direction: column;
+    gap: 0.5rem;
+    width: 200px;
+    z-index: 10000;
+  }
+
+  .nav-links.show {
+    display: flex;
+  }
+
+  .brand img {
+    height: 70px;
+  }
+
+  body {
+    padding-top: 120px;
+  }
+}
+
+/* ===== HERO SECTION ===== */
+.hero {
+  height: 70vh;
+  background-position: center center;
+  background-size: cover;
+}
+
+.hero-content h1 {
+  font-size: clamp(1.5rem, 6vw, 3rem);
+}
+
+.hero-content p {
+  font-size: clamp(0.9rem, 3vw, 1.2rem);
+}
+
+/* ===== CART PANEL ON MOBILE ===== */
+#cartPanel {
+  width: 90%;
+  max-width: 350px;
+}
+
+/* ===== BUTTON SCALING ===== */
+button,
+.notify-btn,
+.add-to-cart {
+  padding: clamp(0.5rem, 2vw, 0.85rem) clamp(1rem, 4vw, 1.5rem);
+  font-size: clamp(0.8rem, 2.5vw, 1rem);
+}
+
 </style>
 </head>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
 <body>
 <header>
   <div class="centered-header">
@@ -165,6 +280,15 @@ document.getElementById('addToCartBtn').addEventListener('click',()=>{
   const imgRect=document.getElementById('productImg').getBoundingClientRect();
   flyToCart(document.getElementById('productImg').src,imgRect.left,imgRect.top);
 });
+
+const menuToggle = document.getElementById('menuToggle');
+const navLinks = document.getElementById('navLinks');
+
+menuToggle.addEventListener('click', () => {
+  navLinks.classList.toggle('show');
+});
+
+
 updateCartCount();
 renderCart();
 </script>

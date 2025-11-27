@@ -2,566 +2,457 @@
 <html lang="en">
 <head>
 <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 <title>The Nine Ball — Tattoo Academy</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
 <style>
-/* ===== RESET & BASE ===== */
-*{margin:0;padding:0;box-sizing:border-box}
-html,body{height:100%;font-family:'Poppins',sans-serif;background:#0e0e0e;color:#fff;overflow-x:hidden;scroll-behavior:smooth}
-a{color:inherit;text-decoration:none}
+  /* ===== RESET & BASE ===== */
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html, body { height:100%; font-family:'Poppins', sans-serif; background:#0e0e0e; color:#fff; scroll-behavior:smooth; overflow-x:hidden; }
+  a { color:inherit; text-decoration:none; }
+  button { font-family:'Poppins', sans-serif; cursor:pointer; }
 
-/* ===== HEADER ===== */
-#mainHeader{position:fixed;top:0;left:0;width:100%;background:rgba(0,0,0,0.9);z-index:1000;padding:1rem;box-shadow:0 4px 6px rgba(0,0,0,0.1)}
-.centered-header{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:1rem 1rem}
-.brand img{height:90px;border-radius:10px}
-.centered-header h2{color:#c7a86c;margin-top:.4rem;letter-spacing:2px}
-.nav-links{margin-top:.8rem;display:flex;gap:1.2rem;flex-wrap:wrap;justify-content:center}
-.nav-links a{font-weight:600;color:#fff}
-.nav-links a:hover{color:#c7a86c}
-.menu-toggle{display:none}
+  /* ===== HEADER ===== */
+  header { position:fixed; top:0; left:0; width:100%; background:rgba(0,0,0,0.95); z-index:1000; padding:1rem; box-shadow:0 4px 6px rgba(0,0,0,0.2); }
+  .centered-header { display:flex; flex-direction:column; align-items:center; text-align:center; }
+  .brand { display:flex; align-items:center; gap:12px; }
+  .brand img { height:90px; border-radius:10px; transform-style: preserve-3d; transition: transform 0.3s ease, box-shadow 0.3s ease; }
+  .brand a:hover img { box-shadow: 0 0 20px #c7a86c, 0 0 40px #c7a86c, 0 0 60px #c7a86c; animation: logoGlow 1.5s infinite alternate; }
+  .brand div h2 { color:#c7a86c; margin-top:0.4rem; letter-spacing:2px; }
+  .brand div div { font-size:0.9rem; color:#ddd; }
+  .nav-links { margin-top:0.8rem; display:flex; gap:1.2rem; flex-wrap:wrap; justify-content:center; }
+  .nav-links a { font-weight:600; color:#fff; transition: color 0.3s ease; }
+  .nav-links a:hover { color:#c7a86c; }
+  body { padding-top:140px; }
 
-/* space for header */
-body{padding-top:140px}
+  /* ===== HERO ===== */
+  .hero-parallax {
+  height: 50vh;
+  min-height: 360px;
+  background: url('cover-tatto.jpg') center/cover no-repeat fixed; /* 'fixed' enables parallax */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
 
-/* ===== HERO ===== */
-.hero-parallax{height:50vh;min-height:360px;background-image:url('cover-tatto.jpg');background-size:cover;background-position:center;display:flex;align-items:center;justify-content:center;position:relative}
-.hero-overlay{position:absolute;inset:0;background:rgba(0,0,0,.45)}
-.hero-content{position:relative;z-index:2;text-align:center;padding:1.5rem;max-width:900px}
-.hero-content h1{color:#c7a86c;font-size:2.2rem;margin-bottom:.6rem}
-.hero-content p{opacity:.9;margin-bottom:1rem}
-.hero-content .btn{background:#c7a86c;color:#000;padding:.7rem 1.25rem;border-radius:8px;font-weight:600}
-.hero-content .btn:hover{background:#fff}
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+}
 
-/* ===== SECTIONS ===== */
-section{padding:3.5rem 1rem;max-width:1100px;margin:0 auto}
-section h2{color:#c7a86c;font-size:1.6rem;letter-spacing:1.8px;margin-bottom:1rem;text-transform:uppercase}
-section p{color:#ddd;line-height:1.6}
+.hero-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  max-width: 900px;
+  padding: 1.5rem;
+}
 
-/* ===== ACADEMY INFO LAYOUT ===== */
-.info-grid{display:grid;grid-template-columns:1fr 380px;gap:30px;align-items:start;margin-top:1rem}
-@media(max-width:980px){.info-grid{grid-template-columns:1fr;}}
-.card{background:#1a1a1a;border:1px solid #2a2a2a;border-radius:12px;padding:20px;color:#ddd}
-.highlight{color:#c7a86c;font-weight:700}
+  .hero-content h1 { color:#c7a86c; font-size:2.2rem; margin-bottom:0.6rem; }
+  .hero-content p { opacity:0.9; margin-bottom:1rem; }
+  .hero-content .btn { background:#c7a86c; color:#000; padding:0.7rem 1.25rem; border-radius:8px; font-weight:600; transition: background 0.3s ease; }
+  .hero-content .btn:hover { background:#fff; }
 
-/* syllabus list */
-.study-list{display:grid;grid-template-columns:repeat(2, minmax(0,1fr));gap:12px}
-@media(max-width:720px){.study-list{grid-template-columns:1fr}}
-.study-list li{list-style:none;padding-left:14px;position:relative}
-.study-list li::before{content:"•";position:absolute;left:0;color:#c7a86c}
+  /* ===== SECTIONS ===== */
+  section { padding:3.5rem 1rem; max-width:1100px; margin:0 auto; }
+  section h2 { color:#c7a86c; font-size:1.6rem; letter-spacing:1.8px; margin-bottom:1rem; text-transform:uppercase; }
+  section p { color:#ddd; line-height:1.6; }
 
-/* timetables & booking column */
-.timetable{margin-bottom:1rem}
-.timetable table{width:100%;border-collapse:collapse}
-.timetable th, .timetable td{padding:10px;border-bottom:1px solid rgba(199,168,108,0.08);text-align:left}
-.seats{font-weight:700;color:#c7a86c}
+  /* ===== CARDS ===== */
+  .card { background:#1a1a1a; border:1px solid #2a2a2a; border-radius:12px; padding:20px; color:#ddd; margin-bottom:1.5rem; }
+  .highlight { color:#c7a86c; font-weight:700; }
 
-/* booking form */
-.form-row{margin-bottom:12px}
-label{display:block;color:#c7a86c;font-weight:700;margin-bottom:6px}
-input[type="text"],input[type="email"],select,textarea{width:100%;padding:10px;border:1px solid #2a2a2a;border-radius:8px;background:#0f0f0f;color:#fff}
-input[type="text"]::placeholder,input[type="email"]::placeholder{color:#888}
-textarea{min-height:90px}
-.checkbox-row{display:flex;align-items:center;gap:10px;color:#ddd}
-button.cta{background:#c7a86c;color:#000;border:none;padding:10px 16px;border-radius:10px;font-weight:800;cursor:pointer}
-button.cta:disabled{opacity:.5;cursor:not-allowed}
+  /* ===== TIMETABLE ===== */
+  .timetable table { width:100%; border-collapse:collapse; }
+  .timetable th, .timetable td { padding:10px; border-bottom:1px solid rgba(199,168,108,0.08); text-align:left; }
+  .seats { font-weight:700; color:#c7a86c; cursor:pointer; transition: color 0.2s ease; }
+  .seats:hover { color:#fff; }
 
-/* booking confirmation */
-.toast{position:fixed;right:20px;bottom:90px;background:#1a1a1a;border:1px solid #c7a86c;padding:12px 16px;border-radius:10px;box-shadow:0 6px 18px rgba(0,0,0,.6);z-index:3000}
+  /* ===== FORMS ===== */
+  .form-row { margin-bottom:12px; }
+  label { display:block; color:#c7a86c; font-weight:700; margin-bottom:6px; }
+  input, select, textarea { width:100%; padding:10px; border-radius:8px; border:1px solid #2a2a2a; background:#0f0f0f; color:#fff; }
+  input::placeholder, textarea::placeholder { color:#888; }
+  textarea { min-height:90px; }
+  .checkbox-row { display:flex; align-items:center; gap:10px; color:#ddd; }
+  button.cta { background:#c7a86c; color:#000; border:none; padding:10px 16px; border-radius:10px; font-weight:800; cursor:pointer; transition: background 0.3s ease; }
+  button.cta:disabled { opacity:0.5; cursor:not-allowed; }
 
-/* ===== FAQS ===== */
-.faqs{display:grid;grid-template-columns:1fr 1fr;gap:18px}
-@media(max-width:900px){.faqs{grid-template-columns:1fr}}
-.faq{background:#1a1a1a;padding:16px;border-radius:10px;border:1px solid #2a2a2a}
+  /* ===== TOAST ===== */
+  .toast { position:fixed; right:20px; bottom:90px; background:#1a1a1a; border:1px solid #c7a86c; padding:12px 16px; border-radius:10px; box-shadow:0 6px 18px rgba(0,0,0,0.6); z-index:3000; display:none; }
 
-/* gallery (kept from original) */
-.carousel-container{position:relative;max-width:1000px;margin:2rem auto;overflow:hidden;border:2px solid #2a2a2a;border-radius:12px}
-.carousel-track{display:flex;gap:12px;padding:12px;align-items:center}
-.carousel-item{flex:0 0 auto;width:220px}
-.carousel-item img{width:100%;height:140px;object-fit:cover;border-radius:8px;border:2px solid #2a2a2a}
+  /* ===== FAQ ===== */
+  .faqs { display:grid; grid-template-columns:1fr 1fr; gap:18px; }
+  @media(max-width:900px) { .faqs { grid-template-columns:1fr; } }
+  .faq { background:#1a1a1a; padding:16px; border-radius:10px; border:1px solid #2a2a2a; }
+  .faq h4 { color:#c7a86c; margin-bottom:8px; cursor:pointer; transition: color 0.3s ease; }
+  .faq p { display:none; }
 
-/* contact/footer */
-.contact-info-footer{background:#0e0e0e;padding:2rem 5%;color:#ddd;border-top:2px solid #c7a86c;margin-top:30px}
-.footer{margin-top:12px;color:#aaa;text-align:center}
+  /* ===== FOOTER ===== */
+  .contact-info-footer { background:#0e0e0e; padding:2rem 5%; color:#ddd; border-top:2px solid #c7a86c; margin-top:30px; }
+  .footer { text-align:center; margin-top:12px; color:#aaa; }
 
-/* cookie banner (keeps earlier style) */
-#cookieConsent{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#1a1a1a;color:#fff;padding:12px 16px;border:1px solid #c7a86c;border-radius:8px;z-index:2000;display:flex;gap:10px;align-items:center}
-#cookieConsent button{background:#c7a86c;color:#000;border:none;padding:8px 12px;border-radius:6px;cursor:pointer}
-#cookieConsent.hide{opacity:0;transform:translateY(40px);pointer-events:none;transition:all .45s}
+  /* ===== COOKIE BANNER ===== */
+  #cookieConsent { position:fixed; bottom:20px; left:50%; transform:translateX(-50%); background:#1a1a1a; color:#fff; padding:12px 16px; border:1px solid #c7a86c; border-radius:8px; z-index:2000; display:flex; gap:10px; align-items:center; }
+  #cookieConsent button { background:#c7a86c; color:#000; border:none; padding:8px 12px; border-radius:6px; cursor:pointer; }
+  #cookieConsent.hide { opacity:0; transform:translateY(40px); pointer-events:none; transition:all 0.45s; }
 
-/* small helpers */
-.kv{font-weight:700;color:#c7a86c}
-.small{font-size:.95rem;color:#ccc}
-.note{font-size:.95rem;color:#bbb;margin-top:8px}
-.center{display:flex;justify-content:center}
+  @keyframes logoGlow { 0% { box-shadow: 0 0 10px #c7a86c; } 100% { box-shadow: 0 0 40px #c7a86c; } }
+
+  /* ===== Responsive tweaks ===== */
+  @media (max-width:880px) { section { padding:2rem 1rem; } .brand img { height:70px; } body { padding-top:120px; } }
+
+  /* ===== RESET BUTTON ===== */
+ 
+  #resetSeats { display:none; position:fixed; bottom:15px; left:15px; padding:10px 14px; background:#c7a86c; color:#000; border:none; border-radius:8px; font-weight:700; z-index:9999; cursor:pointer; }
+
+/* ===== CUSTOM CHECKBOX ===== */
+.checkbox-row {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end; /* Moves label to the right */
+  gap: 10px;
+}
+
+.checkbox-row input[type="checkbox"] {
+  appearance: none;
+  width: 22px;
+  height: 22px;
+  border: 2px solid #c7a86c;
+  border-radius: 6px;
+  background: #0f0f0f;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.25s ease;
+}
+
+.checkbox-row input[type="checkbox"]:checked {
+  background: #c7a86c;
+  border-color: #c7a86c;
+}
+
+.checkbox-row input[type="checkbox"]:checked::after {
+  content: "✔";
+  position: absolute;
+  top: 0;
+  left: 4px;
+  color: #000;
+  font-size: 16px;
+  font-weight: 800;
+}
+.checkbox-row label {
+  font-weight: 600;
+  color: #c7a86c;
+  cursor: pointer;
+}
+
+
 </style>
 </head>
 <body>
 
-<!-- HEADER -->
-<header id="mainHeader">
+<button id="resetSeats">Reset Seats & Bookings</button>
+
+<header>
   <div class="centered-header">
-    <div class="brand" style="display:flex;align-items:center;gap:12px">
-      <img src="WhatsApp Image 2025-10-18 at 8.49.10 AM (1).jpeg" alt="The Nine Ball logo">
-      <div style="text-align:left">
+    <div class="brand">
+      <a href="index.html"><img src="WhatsApp Image 2025-10-18 at 8.49.10 AM (1).jpeg" alt="The Nine Ball logo"></a>
+      <div>
         <h2>The Nine Ball Academy</h2>
-        <div style="font-size:0.9rem;color:#ddd">Professional Tattoo Training • 18+</div>
+        <div>Professional Tattoo Training • 18+</div>
       </div>
     </div>
-
-    <nav class="nav-links" id="navLinks" style="margin-top:10px">
-      <a href="#about">About</a>
-      <a href="#curriculum">Curriculum</a>
+    <nav class="nav-links">
       <a href="#timetable">Timetable</a>
       <a href="#booking">Book</a>
       <a href="#faqs">FAQs</a>
-      <a href="#contact">Contact</a>
     </nav>
   </div>
 </header>
 
-<!-- HERO -->
-<section class="hero-parallax" aria-hidden="false">
+<section id="hero" class="hero-parallax">
   <div class="hero-overlay"></div>
   <div class="hero-content">
     <h1>The Nine Ball — Tattoo Academy</h1>
-    <p>Two-week, hands-on tattoo course covering technique, safety, business and confidence-building. Learn from experienced professionals and walk away ready to tattoo with support and certificate.</p>
+    <p>Two-week hands-on tattoo course covering technique, safety, business, and confidence-building. Learn from experienced professionals and walk away ready to tattoo with support and certificate.</p>
     <a class="btn" href="#booking">Book a Course</a>
   </div>
 </section>
 
-<!-- ABOUT & QUICK INFO -->
-<section id="about">
-  <h2>About the Course</h2>
-  <div class="info-grid">
-    <div>
-      <div class="card">
-        <p>This intensive course is designed to teach you the practical and business essentials to become a professional tattoo artist. We combine hands-on practice, live demonstrations, and business guidance.</p>
-
-        <ul class="small note" style="margin-top:12px">
-          <li><span class="kv">Start times:</span> Monday - Friday, 10:00 — 17:00</li>
-          <li><span class="kv">Age requirement:</span> 18+ to attend</li>
-          <li><span class="kv">Course cost:</span> £1,800</li>
-          <li><span class="kv">Deposit:</span> £300 (required to secure your place). Rest due 2 weeks before the course.</li>
-        </ul>
-      </div>
-
-      <div style="margin-top:18px" class="card">
-        <h3 style="color:#c7a86c;margin-bottom:10px">What you'll learn</h3>
-        <ul class="study-list">
-          <li>Health &amp; Safety</li>
-          <li>Hygiene</li>
-          <li>Cross-contamination awareness</li>
-          <li>Understanding needle groupings</li>
-          <li>Tattoo machine maintenance</li>
-          <li>Placement &amp; stencil application</li>
-          <li>Consent forms</li>
-          <li>Working with nervous clients</li>
-          <li>Straight lines &amp; packing colour</li>
-          <li>Cover-up approaches</li>
-          <li>Mixing greys (black &amp; grey)</li>
-          <li>Watercolour effects</li>
-          <li>Preventing scarring</li>
-          <li>Bedside manner &amp; troubleshooting</li>
-          <li>Confidence building</li>
-          <li>Correct aftercare &amp; follow-up support</li>
-          <li>Supplier recommendations</li>
-          <li>How to handle fainting</li>
-          <li>Running a successful tattoo business</li>
-          <li>Certificate of completion (accepted by many councils &amp; insurers)</li>
-        </ul>
-      </div>
-    </div>
-
-    <aside>
-      <div class="card">
-        <h3 style="color:#c7a86c">Quick facts</h3>
-        <p class="small"><strong>Duration:</strong> 2 weeks (Mon–Fri), intensive practical programme.</p>
-        <p class="small"><strong>Price:</strong> £1,800 (deposit £300)</p>
-        <p class="small"><strong>Requirements:</strong> Must be 18+, bring ID. No prior tattoo experience required but helpful.</p>
-        <p class="note">Full backup service and ongoing phone support after completion.</p>
-      </div>
-
-      <div style="margin-top:16px" class="card">
-        <h3 style="color:#c7a86c">Certificate</h3>
-        <p class="small">On successful completion you'll receive a certificate compliant with many councils and insurance providers worldwide.</p>
-      </div>
-    </aside>
-  </div>
-</section>
-
-<!-- TIMETABLE & BOOKING -->
 <section id="timetable">
   <h2>Course Dates & Availability — 2026</h2>
   <div class="card timetable">
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
-      <div class="small">Below are scheduled course start dates for 2026 and remaining seats.</div>
-      <div class="small">Seats per course: <span class="kv" id="defaultSeats">8</span></div>
-    </div>
-
+    <p class="small note">Select a date from the table or the dropdown on the booking form. Each course has limited seats.</p>
     <div id="timetableWrap"></div>
-    <div class="note">Select a date from the booking form. Deposits secure your seat. Final balance due 2 weeks before your course start date.</div>
-  </div>
-
-  <div style="margin-top:18px" id="booking">
-    <h2>Book the Course</h2>
-    <div class="card">
-      <form id="bookingForm">
-        <div class="form-row">
-          <label for="courseDate">Course date</label>
-          <select id="courseDate" required></select>
-        </div>
-
-        <div class="form-row">
-          <label for="fullName">Full name</label>
-          <input id="fullName" type="text" placeholder="Your full name" required>
-        </div>
-
-        <div class="form-row">
-          <label for="phone">Phone number</label>
-          <input id="phone" type="text" placeholder="07900 000000" required>
-        </div>
-
-        <div class="form-row">
-          <label for="email">Email address</label>
-          <input id="email" type="email" placeholder="you@example.com" required>
-        </div>
-
-        <div class="form-row">
-          <label for="address">Home address</label>
-          <input id="address" type="text" placeholder="Street, Town, Postcode" required>
-        </div>
-
-        <div class="form-row small note">Please enter your details below. A deposit of <strong>£300</strong> is required to secure your place. Remaining balance due 2 weeks before start date.</div>
-
-        <div style="display:flex;gap:10px;align-items:center;margin-top:8px">
-          <div class="checkbox-row">
-            <input id="agree" type="checkbox" />
-            <label for="agree" style="margin:0;font-weight:600;color:#c7a86c">I agree to the Terms &amp; Conditions</label>
-          </div>
-        </div>
-
-        <div style="display:flex;gap:10px;margin-top:14px">
-          <button id="payDeposit" type="button" class="cta" disabled>Pay Deposit £300</button>
-          <button id="bookBtn" type="submit" class="cta" style="background:#333;color:#fff;border:1px solid #2a2a2a">Book (no payment)</button>
-        </div>
-
-        <div class="note" style="margin-top:8px">You will receive confirmation and a booking reference. For real payments integrate Stripe/PayPal on the server-side.</div>
-      </form>
-    </div>
   </div>
 </section>
 
-<!-- FAQs -->
+<section id="booking">
+  <h2>Book the Course</h2>
+  <div class="card">
+    <form id="bookingForm" novalidate>
+      <div class="form-row">
+        <label for="selectedDate">Select a course date</label>
+        <select id="selectedDate" required>
+          <option value="">— Select a date —</option>
+        </select>
+      </div>
+      <div class="form-row"><label for="fullName">Full name</label><input id="fullName" type="text" placeholder="Your full name" required></div>
+      <div class="form-row"><label for="phone">Phone number</label><input id="phone" type="text" placeholder="07900 000000" required></div>
+      <div class="form-row"><label for="email">Email</label><input id="email" type="email" placeholder="you@example.com" required></div>
+      <div class="form-row"><label for="address">Home address</label><input id="address" type="text" placeholder="Street, Town, Postcode" required></div>
+      <p style="margin:1rem 0;color:#ddd;">Choose to pay in full (£1,500) or deposit (£300) to secure your place.</p>
+      <div class="checkbox-row">
+        <input id="agree" type="checkbox"><label for="agree">I agree to the Terms & Conditions</label>
+      </div>
+      <div style="display:flex; gap:10px; margin-top:8px;">
+        <button id="payDeposit" type="button" class="cta" disabled style="flex:1;">Pay Deposit £300</button>
+        <button id="payFull" type="button" class="cta" disabled style="flex:1;">Pay in Full £1,500</button>
+      </div>
+    </form>
+  </div>
+</section>
+
 <section id="faqs">
   <h2>Frequently Asked Questions</h2>
   <div class="faqs">
-    <div class="faq">
-      <h4 style="color:#c7a86c">Will I be able to tattoo at the end of the course?</h4>
-      <p>Yes — you'll be taught practical skills and should be tattooing daily if you want to progress. The course sets you up to start tattooing with confidence.</p>
-    </div>
-    <div class="faq">
-      <h4 style="color:#c7a86c">Can I learn everything on a 2-week course?</h4>
-      <p>You’ll be given the knowledge and practice to put you on the right path. Mastery needs ongoing practice; we provide follow-up support.</p>
-    </div>
-    <div class="faq">
-      <h4 style="color:#c7a86c">What if I have questions after the course?</h4>
-      <p>Call us — we offer ongoing phone support. Many past students remain in regular contact for troubleshooting and advice.</p>
-    </div>
-    <div class="faq">
-      <h4 style="color:#c7a86c">Will you help me open a studio?</h4>
-      <p>Yes — we cover the business side, health & safety and give our tried-and-tested advice for running a studio.</p>
-    </div>
-    <div class="faq">
-      <h4 style="color:#c7a86c">Is it easy to become a tattooist?</h4>
-      <p>No — it requires commitment, hard work and dedication. That’s part of what sets professionals apart.</p>
-    </div>
-    <div class="faq">
-      <h4 style="color:#c7a86c">Do you supply tattoo kits?</h4>
-      <p>We can supply kits but only for students who have completed the course. We also share trusted supplier info during training.</p>
-    </div>
+    <div class="faq"><h4>Will I be able to tattoo at the end?</h4><p>Yes — you will learn practical skills and can start tattooing confidently.</p></div>
+    <div class="faq"><h4>Can I learn everything in 2 weeks?</h4><p>You’ll get the knowledge and practice to start. Mastery requires ongoing practice; support is provided.</p></div>
+    <div class="faq"><h4>Questions after course?</h4><p>Call us — ongoing phone support available.</p></div>
+    <div class="faq"><h4>Help with opening a studio?</h4><p>Yes — business guidance included.</p></div>
+    <div class="faq"><h4>Do you supply kits?</h4><p>Kits available for course completers, supplier info shared during training.</p></div>
   </div>
 </section>
 
-<!-- GALLERY (kept) -->
-<section id="gallery">
-  <h2>Gallery</h2>
-  <div class="carousel-container">
-    <div class="carousel-track" aria-hidden="false">
-      <div class="carousel-item"><img src="540100359_17903426910251508_9005195133854864387_n.jpg" alt=""></div>
-      <div class="carousel-item"><img src="544132214_17904662535251508_4858253942663327729_n.jpg" alt=""></div>
-      <div class="carousel-item"><img src="548825734_17905209549251508_7213983784363128660_n.jpg" alt=""></div>
-      <div class="carousel-item"><img src="549283422_17905209468251508_1739889153315557077_n.jpg" alt=""></div>
-      <div class="carousel-item"><img src="556848278_17906952252251508_1350239698599296139_n.jpg" alt=""></div>
-      <!-- kept the rest of your images so nothing is lost -->
-      <div class="carousel-item"><img src="WhatsApp Image 2025-10-22 at 6.52.56 PM (11).jpeg" alt=""></div>
-      <div class="carousel-item"><img src="WhatsApp Image 2025-10-22 at 6.52.57 PM (4).jpeg" alt=""></div>
-      <div class="carousel-item"><img src="WhatsApp Image 2025-10-22 at 6.52.56 PM (6).jpeg" alt=""></div>
-      <div class="carousel-item"><img src="WhatsApp Image 2025-10-22 at 6.52.56 PM (7).jpeg" alt=""></div>
-      <div class="carousel-item"><img src="WhatsApp Image 2025-10-22 at 6.52.56 PM (8).jpeg" alt=""></div>
-      <div class="carousel-item"><img src="WhatsApp Image 2025-10-22 at 6.52.56 PM (9).jpeg" alt=""></div>
-      <div class="carousel-item"><img src="WhatsApp Image 2025-10-22 at 6.52.56 PM (10).jpeg" alt=""></div>
-      <div class="carousel-item"><img src="WhatsApp Image 2025-10-22 at 6.52.56 PM (11).jpeg" alt=""></div>
-      <div class="carousel-item"><img src="WhatsApp Image 2025-10-22 at 6.52.57 PM (5).jpeg" alt=""></div>
-      <div class="carousel-item"><img src="WhatsApp Image 2025-10-22 at 6.52.57 PM (7).jpeg" alt=""></div>
-      <div class="carousel-item"><img src="WhatsApp Image 2025-10-22 at 6.52.58 PM (6).jpeg" alt=""></div>
-      <div class="carousel-item"><img src="WhatsApp Image 2025-10-22 at 6.52.58 PM (5).jpeg" alt=""></div>
-      <div class="carousel-item"><img src="WhatsApp Image 2025-10-22 at 6.52.58 PM (4).jpeg" alt=""></div>
-    </div>
-  </div>
-</section>
-
-<!-- CONTACT & FOOTER -->
 <div class="contact-info-footer" id="contact">
-  <div style="max-width:1000px;margin:0 auto;display:flex;gap:20px;flex-wrap:wrap;justify-content:space-between">
+  <div style="max-width:1000px;margin:0 auto;display:flex;flex-wrap:wrap;gap:20px;justify-content:space-between">
     <div style="flex:1;min-width:240px">
       <p>📍 <strong>59 Harpur Street, MK40 2SR</strong></p>
       <p>📞 <a href="tel:07926718246" style="color:#c7a86c">07926 718246</a></p>
       <p class="small">Open daily 10:30 — 21:00</p>
     </div>
     <div style="flex:1;min-width:240px">
-      <p class="small">For course enquiries email: <a href="mailto:thenineballtattoostudio@hotmail.com" style="color:#c7a86c">thenineballtattoostudio@hotmail.com</a></p>
-      <p class="small">Follow us on social channels for updates and extra workshops.</p>
+      <p class="small">For course enquiries: <a href="mailto:thenineballtattoostudio@hotmail.com" style="color:#c7a86c">thenineballtattoostudio@hotmail.com</a></p>
+      <p class="small">Follow us on social channels for updates and workshops.</p>
     </div>
   </div>
-
-  <footer class="footer">
-    <p>&copy; 2026 The Nine Ball. All Rights Reserved.</p>
-  </footer>
+  <footer class="footer">&copy; 2026 The Nine Ball. All Rights Reserved.</footer>
 </div>
 
-<!-- COOKIE BANNER -->
-<div id="cookieConsent" aria-live="polite">
-  <span>This website uses only necessary cookies to ensure functionality.</span>
+<div id="cookieConsent">
+  <span>This website uses only necessary cookies.</span>
   <button id="acceptCookies">Got it!</button>
 </div>
 
-<!-- BOOKING CONFIRMATION TOAST (hidden until needed) -->
-<div id="toast" class="toast" style="display:none"></div>
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
 
 <script>
-/* ===== Persisted course dates & seats logic =====
-   - We create a set of sample course start dates for 2026
-   - Each course has a seatsLeft property stored in localStorage so bookings persist
-   - Bookings decrement seats and create a booking record in localStorage
-*/
+ // ===== INIT DATA =====
+const defaultSeats = 4;
+const courses = JSON.parse(localStorage.getItem('academyDatesV2')) || [
+  {id:'2026-01-05', label:'Mon 5th Jan 2026', seatsLeft:defaultSeats}, // Will reset below
+  {id:'2026-02-02', label:'Mon 2nd Feb 2026', seatsLeft:defaultSeats},
+  {id:'2026-03-02', label:'Mon 2nd Mar 2026', seatsLeft:defaultSeats},
+  {id:'2026-04-06', label:'Mon 6th Apr 2026', seatsLeft:defaultSeats},
+  {id:'2026-05-04', label:'Mon 4th May 2026', seatsLeft:defaultSeats},
+  {id:'2026-06-01', label:'Mon 1st Jun 2026', seatsLeft:defaultSeats},
+  {id:'2026-07-06', label:'Mon 6th Jul 2026', seatsLeft:defaultSeats},
+  {id:'2026-09-07', label:'Mon 7th Sep 2026', seatsLeft:defaultSeats},
+  {id:'2026-10-05', label:'Mon 5th Oct 2026', seatsLeft:defaultSeats},
+  {id:'2026-11-02', label:'Mon 2nd Nov 2026', seatsLeft:defaultSeats},
+];
 
-// ===== RESET ACADEMY PAGE STORAGE =====
-// This clears all stored bookings, seat data & cookie banner state.
- c      
+// ===== RESET MON 5TH JAN =====
+const monJan = courses.find(c => c.id === '2026-01-05');
+if(monJan) monJan.seatsLeft = defaultSeats;
 
+// Save updated courses to localStorage
+localStorage.setItem('academyDatesV2', JSON.stringify(courses));
 
-/* Utility */
-const $ = sel => document.querySelector(sel);
-const $$ = sel => Array.from(document.querySelectorAll(sel));
+// ===== ELEMENTS =====
+const timetableWrap = document.getElementById('timetableWrap');
+const selectedDateSelect = document.getElementById('selectedDate');
+const bookingForm = document.getElementById('bookingForm');
+const agree = document.getElementById('agree');
+const payFull = document.getElementById('payFull');
+const payDeposit = document.getElementById('payDeposit');
+const toast = document.getElementById('toast');
+const fullNameInput = document.getElementById('fullName');
+const phoneInput = document.getElementById('phone');
+const emailInput = document.getElementById('email');
+const addressInput = document.getElementById('address');
+const DEPOSIT_LINK = 'https://buy.stripe.com/bJe8wR8cP6x08Tz5Mb2VG01';
+const STATIC_FULL_PAYMENT_LINK = 'https://buy.stripe.com/14A6oJ78L4oS1r7b6v2VG00';
 
-/* --- Course dates setup (2026 sample) --- */
-/* We'll generate a few monthly course start dates in 2026 (you can replace with real dates) */
-const defaultSeatCount = 8;
-const stored = JSON.parse(localStorage.getItem('academyDatesV1') || 'null');
-
-let courses;
-if (stored && Array.isArray(stored)) {
-  courses = stored;
-} else {
-  courses = [
-    // sample two-week course start dates (Mondays)
-    { id: '2026-01-05', label:'Mon 5 Jan 2026', seatsLeft: defaultSeatCount },
-    { id: '2026-02-02', label:'Mon 2 Feb 2026', seatsLeft: defaultSeatCount },
-    { id: '2026-03-02', label:'Mon 2 Mar 2026', seatsLeft: defaultSeatCount },
-    { id: '2026-04-06', label:'Mon 6 Apr 2026', seatsLeft: defaultSeatCount },
-    { id: '2026-05-04', label:'Mon 4 May 2026', seatsLeft: defaultSeatCount },
-    { id: '2026-06-01', label:'Mon 1 Jun 2026', seatsLeft: defaultSeatCount },
-    { id: '2026-07-06', label:'Mon 6 Jul 2026', seatsLeft: defaultSeatCount },
-    { id: '2026-09-07', label:'Mon 7 Sep 2026', seatsLeft: defaultSeatCount },
-    { id: '2026-10-05', label:'Mon 5 Oct 2026', seatsLeft: defaultSeatCount },
-    { id: '2026-11-02', label:'Mon 2 Nov 2026', seatsLeft: defaultSeatCount },
-  ];
-  localStorage.setItem('academyDatesV1', JSON.stringify(courses));
+// ===== TOAST HELPER =====
+function showToastMsg(msg, ms = 3500) {
+  toast.textContent = msg;
+  toast.style.display = 'block';
+  setTimeout(() => { toast.style.display = 'none'; }, ms);
 }
 
-/* Booking store */
-let bookings = JSON.parse(localStorage.getItem('academyBookingsV1') || '[]');
-
-/* Render timetable table */
+// ===== TIMETABLE =====
 function renderTimetable() {
-  const wrap = $('#timetableWrap');
-  if(!wrap) return;
   const table = document.createElement('table');
-  table.innerHTML = `<thead><tr><th>Course start</th><th>Seats left</th><th>Details</th></tr></thead>`;
+  table.innerHTML = `<thead><tr><th>Course start</th><th style="text-align:center">Seats left</th><th>Details</th></tr></thead>`;
   const tbody = document.createElement('tbody');
   courses.forEach(c => {
     const tr = document.createElement('tr');
-    tr.innerHTML = `<td>${c.label}</td>
-                    <td class="seats" data-id="${c.id}">${c.seatsLeft}</td>
-                    <td class="small">Mon–Fri • 10:00–17:00 • Duration: 2 weeks</td>`;
+    tr.innerHTML = `<td>${c.label}</td><td class="seats" data-id="${c.id}" style="text-align:center">${c.seatsLeft}</td><td class="small">Mon–Fri • 10:00–17:00 • 2 weeks</td>`;
     tbody.appendChild(tr);
   });
   table.appendChild(tbody);
-  wrap.innerHTML = '';
-  wrap.appendChild(table);
+  timetableWrap.innerHTML = '';
+  timetableWrap.appendChild(table);
 }
 
-/* Populate booking select */
-function populateDateSelect() {
-  const sel = $('#courseDate');
-  sel.innerHTML = '<option value="">— Select a course date —</option>';
+// ===== UPDATE DROPDOWN =====
+function populateDateDropdown() {
+  selectedDateSelect.innerHTML = '<option value="">— Select a date —</option>';
   courses.forEach(c => {
     const opt = document.createElement('option');
     opt.value = c.id;
-    opt.textContent = `${c.label} — Seats left: ${c.seatsLeft}`;
-    if (c.seatsLeft <= 0) opt.disabled = true;
-    sel.appendChild(opt);
+    opt.textContent = `${c.label} ${c.seatsLeft > 0 ? `(${c.seatsLeft} seats)` : '(FULL)'}`;
+    if(c.seatsLeft <=0) opt.disabled = true;
+    selectedDateSelect.appendChild(opt);
   });
 }
 
-/* Toast helper */
-function showToast(msg, ms=3500) {
-  const t = $('#toast');
-  t.textContent = msg;
-  t.style.display = 'block';
-  setTimeout(()=> t.style.display='none', ms);
+// ===== ENABLE BUTTONS =====
+function checkReady() {
+  const filled = fullNameInput.value.trim() && phoneInput.value.trim() && emailInput.value.trim() && addressInput.value.trim();
+  const dateSelected = !!selectedDateSelect.value;
+  const agreed = agree.checked;
+  const enable = !!(filled && dateSelected && agreed);
+  payDeposit.disabled = !enable;
+  payFull.disabled = !enable;
 }
 
-/* Save courses state */
-function saveCourses() {
-  localStorage.setItem('academyDatesV1', JSON.stringify(courses));
+// ===== DECREMENT SEATS =====
+function decrementSeat(dateId) {
+  const idx = courses.findIndex(c => c.id === dateId);
+  if(idx>=0 && courses[idx].seatsLeft>0) {
+    courses[idx].seatsLeft--;
+    localStorage.setItem('academyDatesV2', JSON.stringify(courses));
+    renderTimetable();
+    populateDateDropdown();
+  }
 }
 
-/* Save bookings */
-function saveBookings() {
-  localStorage.setItem('academyBookingsV1', JSON.stringify(bookings));
-}
-
-/* Booking form behaviour */
-const agree = $('#agree');
-const payDeposit = $('#payDeposit');
-const bookingForm = $('#bookingForm');
-const bookBtn = $('#bookBtn');
-
-agree.addEventListener('change', () => {
-  payDeposit.disabled = !agree.checked;
-  bookBtn.disabled = !agree.checked;
-});
-
-/* Simulate deposit payment flow:
-   - when user clicks Pay Deposit, we create booking with depositPaid:true
-   - decrement seats, save and display confirmation
-*/
-payDeposit.addEventListener('click', () => {
-  const form = bookingForm;
-  if (!form.reportValidity()) return;
-  const date = $('#courseDate').value;
-  if (!date) return showToast('Please choose a course date');
-  const course = courses.find(c=>c.id===date);
-  if(!course || course.seatsLeft<=0) return showToast('Selected course is full');
-  // create booking
+// ===== PAYMENTS =====
+function handleBooking(paymentType, link) {
+  if(!fullNameInput.value.trim() || !emailInput.value.trim() || !selectedDateSelect.value) {
+    showToastMsg('Please complete the form and select a date first.');
+    return;
+  }
   const booking = {
-    id: 'BKG' + Date.now(),
-    date: course.id,
-    label: course.label,
-    name: $('#fullName').value.trim(),
-    phone: $('#phone').value.trim(),
-    email: $('#email').value.trim(),
-    address: $('#address').value.trim(),
-    depositPaid: true,
-    amountPaid: 300,
+    name: fullNameInput.value.trim(),
+    phone: phoneInput.value.trim(),
+    email: emailInput.value.trim(),
+    address: addressInput.value.trim(),
+    date: selectedDateSelect.value,
+    paid: paymentType,
     createdAt: new Date().toISOString()
   };
+  const bookings = JSON.parse(localStorage.getItem('academyBookingsV2') || '[]');
   bookings.push(booking);
-  // decrement seat
-  course.seatsLeft = Math.max(0, course.seatsLeft - 1);
-  saveBookings();
-  saveCourses();
-  renderTimetable();
-  populateDateSelect();
-  // confirm to user
-  showToast(`Deposit paid — booking confirmed (${booking.label}). Ref: ${booking.id}`, 6000);
-  // disable buttons to avoid double payment
-  payDeposit.disabled = true;
-  bookBtn.disabled = true;
-});
+  localStorage.setItem('academyBookingsV2', JSON.stringify(bookings));
+  decrementSeat(selectedDateSelect.value);
+  window.location.href = link;
+}
 
-/* Plain booking (without simulated payment) — records booking but deposit not paid */
-bookingForm.addEventListener('submit', (e) => {
-  e.preventDefault();
-  const date = $('#courseDate').value;
-  if (!date) return showToast('Please choose a course date');
-  const course = courses.find(c=>c.id===date);
-  if(!course || course.seatsLeft<=0) return showToast('Selected course is full');
-  const booking = {
-    id: 'BKG' + Date.now(),
-    date: course.id,
-    label: course.label,
-    name: $('#fullName').value.trim(),
-    phone: $('#phone').value.trim(),
-    email: $('#email').value.trim(),
-    address: $('#address').value.trim(),
-    depositPaid: false,
-    amountPaid: 0,
-    createdAt: new Date().toISOString()
-  };
-  bookings.push(booking);
-  course.seatsLeft = Math.max(0, course.seatsLeft - 1);
-  saveBookings();
-  saveCourses();
-  renderTimetable();
-  populateDateSelect();
-  showToast(`Booking saved for ${booking.label}. Please pay deposit £300 to secure your place. Ref: ${booking.id}`, 6000);
-  // auto-disable submit to avoid duplicates
-  bookBtn.disabled = true;
-  payDeposit.disabled = true;
-});
+payFull.addEventListener('click', () => handleBooking('full', STATIC_FULL_PAYMENT_LINK));
+payDeposit.addEventListener('click', () => handleBooking('deposit', DEPOSIT_LINK));
 
-/* Initial render */
-renderTimetable();
-populateDateSelect();
-
-/* Update seats display periodically (if other tabs change localStorage) */
-window.addEventListener('storage', () => {
-  const s = JSON.parse(localStorage.getItem('academyDatesV1') || 'null');
-  if (s) { courses = s; renderTimetable(); populateDateSelect(); }
-});
-
-/* ===== Cookie banner logic (keeps previous behaviour) ===== */
-const cookieBanner = document.getElementById('cookieConsent');
-const acceptCookies = document.getElementById('acceptCookies');
-acceptCookies.addEventListener('click', () => {
-  cookieBanner.classList.add('hide');
-  localStorage.setItem('cookiesAccepted', 'true');
-});
-window.addEventListener('DOMContentLoaded', () => {
-  if (localStorage.getItem('cookiesAccepted') === 'true') {
-    cookieBanner.classList.add('hide');
+// ===== RESET BUTTON =====
+document.addEventListener('keydown', e => {
+  if(e.ctrlKey && e.shiftKey && e.key.toLowerCase()==='r') {
+    document.getElementById('resetSeats').style.display = 'block';
   }
 });
+document.getElementById('resetSeats').addEventListener('click', () => {
+  if(!confirm("Reset seats and clear bookings?")) return;
+  localStorage.removeItem('academyBookingsV2');
+  localStorage.removeItem('academyDatesV2');
+  location.reload();
+});
 
-/* Minimal carousel auto-scroll for gallery (no controls) */
-(function galleryScroll(){
-  const track = document.querySelector('.carousel-track');
-  if(!track) return;
-  let pos = 0;
-  setInterval(()=>{
-    pos -= 232; // item width + gap ~232
-    if (Math.abs(pos) >= track.scrollWidth - track.clientWidth) pos = 0;
-    track.style.transform = `translateX(${pos}px)`;
-    track.style.transition = 'transform 700ms linear';
-  }, 2500);
-})();
-
-/* Accessibility / add small UX: clicking a timetable seat opens booking with that date preselected */
-document.addEventListener('click', (e)=>{
+// ===== INTERACTIONS =====
+document.addEventListener('click', e => {
   const td = e.target.closest('.seats');
   if(!td) return;
-  const id = td.dataset.id;
-  if(!id) return;
-  // scroll to booking and preselect
-  const sel = $('#courseDate');
-  if(sel){
-    sel.value = id;
-    sel.dispatchEvent(new Event('change'));
-    document.getElementById('booking').scrollIntoView({behavior:'smooth', block:'center'});
-  }
+  selectedDateSelect.value = td.dataset.id;
+  document.getElementById('booking').scrollIntoView({behavior:'smooth', block:'center'});
+  checkReady();
 });
+[fullNameInput, phoneInput, emailInput, addressInput].forEach(i => i.addEventListener('input', checkReady));
+agree.addEventListener('change', checkReady);
+selectedDateSelect.addEventListener('change', checkReady);
+
+// ===== FAQ TOGGLE =====
+document.querySelectorAll('.faq h4').forEach(h => h.addEventListener('click', () => {
+  const p = h.nextElementSibling;
+  if(p) p.style.display = p.style.display==='block' ? 'none' : 'block';
+}));
+
+// ===== COOKIES =====
+document.getElementById('acceptCookies').addEventListener('click', () => {
+  document.getElementById('cookieConsent').classList.add('hide');
+  localStorage.setItem('cookiesAccepted','true');
+});
+if(localStorage.getItem('cookiesAccepted')==='true') document.getElementById('cookieConsent').classList.add('hide');
+
+// ===== NAV HIGHLIGHT =====
+const sections = document.querySelectorAll('section, .contact-info-footer');
+const navLinks = document.querySelectorAll('.nav-links a');
+function highlightNav() {
+  const scrollMiddle = window.scrollY + window.innerHeight/2;
+  sections.forEach(sec => {
+    const top = sec.offsetTop;
+    const bottom = top + sec.offsetHeight;
+    const id = sec.id || 'contact';
+    const link = document.querySelector(`.nav-links a[href="#${id}"]`);
+    if(!link) return;
+    link.style.color = (scrollMiddle >= top && scrollMiddle < bottom) ? '#c7a86c' : '#fff';
+  });
+}
+window.addEventListener('scroll', highlightNav);
+navLinks.forEach(link => link.addEventListener('click', e => {
+  e.preventDefault();
+  document.querySelector(link.getAttribute('href')).scrollIntoView({behavior:'smooth', block:'start'});
+}));
+highlightNav();
+
+// ===== LOGO TILT =====
+const logoLink = document.querySelector('.brand a');
+if(logoLink){
+  const logoImg = logoLink.querySelector('img');
+  logoLink.addEventListener('mousemove', e => {
+    const rect = logoLink.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    const rotateX = ((y - rect.height/2)/(rect.height/2))*8;
+    const rotateY = ((x - rect.width/2)/(rect.width/2))*-8;
+    logoImg.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.03)`;
+  });
+  logoLink.addEventListener('mouseleave', ()=>{logoImg.style.transform='rotateX(0deg) rotateY(0deg) scale(1)';});
+}
+
+// Parallax effect for hero image
+const hero = document.querySelector('.hero-parallax');
+window.addEventListener('scroll', () => {
+  const scrollPos = window.scrollY;
+  hero.style.backgroundPositionY = `${scrollPos * 0.5}px`; // Adjust 0.5 for speed
+});
+
+
+// ===== INIT =====
+renderTimetable();
+populateDateDropdown();
+checkReady();
+
 </script>
 </body>
 </html>

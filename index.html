@@ -50,6 +50,10 @@ body {
     transition: all 0.4s ease;
 }
 
+.cookies-btn {
+    display: none !important;
+}
+
 .brand img {
     height: 110px;
     width:auto;
@@ -154,6 +158,12 @@ section p { font-size:1.1rem; line-height:1.6; opacity:0.85; }
 }
 #backToTop.show { opacity:1; visibility:visible; }
 
+#cookieConsent.hide {
+    display: none !important;
+}
+
+
+
 /* ===== ABOUT SECTION ===== */
 .about-section {
   background-color: #0e0e0e;
@@ -204,6 +214,21 @@ section p { font-size:1.1rem; line-height:1.6; opacity:0.85; }
   gap: 30px;
   margin-bottom: 50px;
 }
+
+@media (max-width: 480px) {
+  section {
+    padding: 3rem 1rem;
+  }
+
+  .hero-content p {
+    font-size: 1rem;
+  }
+
+  .shop-item, .branch {
+    padding: 20px;
+  }
+}
+
 
 /* ==== FIXED SHOP ITEMS TO MATCH ABOUT US === */
 .shop-item-link {
@@ -390,6 +415,11 @@ section p { font-size:1.1rem; line-height:1.6; opacity:0.85; }
 </head>
 <body>
 
+  <div id="cookieConsent">
+  <span>This website uses only necessary cookies to ensure functionality.</span>
+  <button id="acceptCookies">Got it!</button>
+</div>
+
 <!-- HEADER -->
 <header id="mainHeader">
   <div class="centered-header">
@@ -399,11 +429,12 @@ section p { font-size:1.1rem; line-height:1.6; opacity:0.85; }
     </div>
 
     <!-- Desktop & Mobile Nav -->
-     <nav class="nav-links" id="navLinks">
+   <nav class="nav-links" id="navLinks">
   <a href="#about">About</a>
   <a href="shop.html">Shop</a>
   <a href="#gallery">Gallery</a>
   <a href="#contact">Contact</a>
+  <a href="academy.html">Academy</a> <!-- New Academy nav link -->
 </nav>
 
     <button class="menu-toggle" id="menuToggle" aria-label="Toggle Menu">
@@ -427,24 +458,37 @@ section p { font-size:1.1rem; line-height:1.6; opacity:0.85; }
 </section>
 
 <!-- ABOUT -->
-<section id="about" class="about-section">
+<section id="about" class="shop-section">
   <h2>About Us</h2>
-  <p class="intro">At <strong>The Nine Ball</strong>, artistry and individuality lie at the heart of everything we do. Our collective of skilled tattoo artists combines technical mastery with creative vision to transform ideas into timeless works of art.</p>
-  <div class="branches">
-    <div class="branch">
-      <h3>The Nine Ball Studio</h3>
-      <p>A refined tattoo space where our artists bring visions to life through bespoke, detail-driven work and impeccable craftsmanship.</p>
-    </div>
-    <div class="branch">
-      <h3>The Nine Ball Aftercare</h3>
-      <p>Our signature range of premium aftercare products, formulated to nourish and protect your tattoo, ensuring lasting vibrancy and flawless healing.</p>
-    </div>
-    <div class="branch">
-      <h3>The Nine Ball Academy</h3>
-      <p>An educational platform for the next generation of tattoo artists, offering advanced training, mentorship, and artistic development guided by professionals.</p>
-    </div>
+  <p class="intro">
+    At <strong>The Nine Ball</strong>, artistry and individuality lie at the heart of everything we do. 
+    Our collective of skilled tattoo artists combines technical mastery with creative vision to transform ideas into timeless works of art.
+  </p>
+
+  <div class="shop-preview">
+    <a href="comingsoon.html" class="shop-item-link">
+      <div class="shop-item">
+        <h3>The Nine Ball Studio</h3>
+        <p>A refined tattoo space where our artists bring visions to life through bespoke, detail-driven work and impeccable craftsmanship.</p>
+      </div>
+    </a>
+
+    <a href="comingsoon.html" class="shop-item-link">
+      <div class="shop-item">
+        <h3>The Nine Ball Aftercare</h3>
+        <p>Our signature range of premium aftercare products, formulated to nourish and protect your tattoo, ensuring lasting vibrancy and flawless healing.</p>
+      </div>
+    </a>
+
+    <a href="academy.html" class="shop-item-link">
+      <div class="shop-item">
+        <h3>The Nine Ball Academy</h3>
+        <p>An educational platform for the next generation of tattoo artists, offering advanced training, mentorship, and artistic development guided by professionals.</p>
+      </div>
+    </a>
   </div>
 </section>
+
 
 <!-- SHOP -->
 <section id="shop" class="shop-section">
@@ -518,27 +562,28 @@ section p { font-size:1.1rem; line-height:1.6; opacity:0.85; }
   <h2 style="color:#c7a86c;">Contact Us</h2>
   <p style="margin-bottom:30px;">Have a question or want to reach a specific department? Select from the options below.</p>
 
-  <form id="contactForm" action="mailto:thenineballtattoostudio@hotmail.com" method="post" enctype="text/plain" style="max-width:600px; margin:0 auto; text-align:left;">
-    
-    <label for="department" style="display:block; margin-bottom:8px; color:#c7a86c; font-weight:600;">Department</label>
-    <select id="department" name="department" required style="width:100%; padding:10px; border:1px solid #c7a86c; border-radius:6px; background:#1a1a1a; color:#fff; margin-bottom:20px;">
-      <option value="thenineballtattoostudio@hotmail.com">Tattoo Studio</option>
-      <option value="thenineballclothing@hotmail.com">Clothing</option>
-      <option value="thenineballaftercare@hotmail.com">AfterCare</option>
-      <option value="thenineballtattooacademy@hotmail.com">Tattoo Academy</option>
-    </select>
+  <form id="contactForm" style="max-width:600px; margin:0 auto; text-align:left;">
+  
+  <label for="department" style="display:block; margin-bottom:8px; color:#c7a86c; font-weight:600;">Department</label>
+  <select id="department" name="department" required style="width:100%; padding:10px; border:1px solid #c7a86c; border-radius:6px; background:#1a1a1a; color:#fff; margin-bottom:20px;">
+    <option value="thenineballtattoostudio@hotmail.com">Tattoo Studio</option>
+    <option value="thenineballclothing@hotmail.com">Clothing</option>
+    <option value="thenineballaftercare@hotmail.com">AfterCare</option>
+    <option value="thenineballtattooacademy@hotmail.com">Tattoo Academy</option>
+  </select>
 
-    <label for="name" style="display:block; margin-bottom:8px; color:#c7a86c; font-weight:600;">Name</label>
-    <input type="text" id="name" name="name" required style="width:100%; padding:10px; border:1px solid #c7a86c; border-radius:6px; background:#1a1a1a; color:#fff; margin-bottom:20px;">
+  <label for="name" style="display:block; margin-bottom:8px; color:#c7a86c; font-weight:600;">Name</label>
+  <input type="text" id="name" name="name" required style="width:100%; padding:10px; border:1px solid #c7a86c; border-radius:6px; background:#1a1a1a; color:#fff; margin-bottom:20px;">
 
-    <label for="email" style="display:block; margin-bottom:8px; color:#c7a86c; font-weight:600;">Email</label>
-    <input type="email" id="email" name="email" required style="width:100%; padding:10px; border:1px solid #c7a86c; border-radius:6px; background:#1a1a1a; color:#fff; margin-bottom:20px;">
+  <label for="email" style="display:block; margin-bottom:8px; color:#c7a86c; font-weight:600;">Email</label>
+  <input type="email" id="email" name="email" required style="width:100%; padding:10px; border:1px solid #c7a86c; border-radius:6px; background:#1a1a1a; color:#fff; margin-bottom:20px;">
 
-    <label for="message" style="display:block; margin-bottom:8px; color:#c7a86c; font-weight:600;">Message</label>
-    <textarea id="message" name="message" rows="6" required style="width:100%; padding:10px; border:1px solid #c7a86c; border-radius:6px; background:#1a1a1a; color:#fff; margin-bottom:25px;"></textarea>
+  <label for="message" style="display:block; margin-bottom:8px; color:#c7a86c; font-weight:600;">Message</label>
+  <textarea id="message" name="message" rows="6" required style="width:100%; padding:10px; border:1px solid #c7a86c; border-radius:6px; background:#1a1a1a; color:#fff; margin-bottom:25px;"></textarea>
 
-    <button type="submit" style="display:block; width:100%; background:#c7a86c; color:#000; font-weight:700; padding:12px; border:none; border-radius:6px; cursor:pointer; transition:all 0.3s ease;">Send Message</button>
-  </form>
+  <button type="submit" style="display:block; width:100%; background:#c7a86c; color:#000; font-weight:700; padding:12px; border:none; border-radius:6px; cursor:pointer; transition:all 0.3s ease;">Send Message</button>
+</form>
+
 </section>
 
 
@@ -561,6 +606,28 @@ section p { font-size:1.1rem; line-height:1.6; opacity:0.85; }
 
 <!-- BACK TO TOP -->
 <button id="backToTop">↑</button>
+
+<script>
+document.getElementById("contactForm").addEventListener("submit", function(e) {
+    e.preventDefault(); // stop normal form submit
+
+    const departmentEmail = document.getElementById("department").value;
+    const name = encodeURIComponent(document.getElementById("name").value);
+    const email = encodeURIComponent(document.getElementById("email").value);
+    const message = encodeURIComponent(document.getElementById("message").value);
+
+    const subject = encodeURIComponent("New Contact Form Message");
+    const body = encodeURIComponent(
+      "Name: " + name + "%0D%0A" +
+      "Email: " + email + "%0D%0A%0D%0A" +
+      "Message:%0D%0A" + message
+    );
+
+    const mailtoLink = `mailto:${departmentEmail}?subject=${subject}&body=${body}`;
+
+    window.location.href = mailtoLink;
+});
+</script>
 
 <script>
 document.addEventListener("DOMContentLoaded", () => {
@@ -751,12 +818,15 @@ window.addEventListener('DOMContentLoaded', () => {
 });
 
 
+document.addEventListener("DOMContentLoaded", () => {
+    const cookieBtn = document.querySelector(".cookies-btn");
+    if (cookieBtn) cookieBtn.remove();
+});
+
+
+
 </script>
 
-<div id="cookieConsent">
-  <span>This website uses only necessary cookies to ensure functionality.</span>
-  <button id="acceptCookies">Got it!</button>
-</div>
 
 
 
