@@ -1,154 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" />
-  <title>Checkout - The Nine Ball</title>
+<header>
+<a href="shop.html"><img src="logo.png" alt="Nine Ball Logo"></a>
+</header>
 
-  <!-- Stripe -->
-  <script src="https://js.stripe.com/v3/"></script>
 
-  <style>
-    /* (I kept your original styling mostly unchanged) */
-    * { margin:0; padding:0; box-sizing:border-box; }
-    body { font-family:'Poppins', sans-serif; background:#0e0e0e; color:#fff; line-height:1.6; padding-top:100px; display:flex; flex-direction:column; min-height:100vh; }
-    a { color:#c7a86c; text-decoration:none; }
-    a:hover { text-decoration:underline; }
-    header { position:fixed; top:0; width:100%; z-index:1000; display:flex; justify-content:space-between; align-items:center; padding:1rem 2rem; background:rgba(0,0,0,0.95); border-bottom:1px solid #111; }
-    header img { height:60px; border-radius:12px; }
-    main { max-width:980px; margin:0 auto; padding:2.25rem 1.25rem; flex:1; }
-    h1 { font-size:2rem; color:#c7a86c; margin-bottom:1.5rem; letter-spacing:0.5px; text-align:center; }
-    .checkout-container { display:flex; flex-wrap:wrap; gap:2rem; align-items:flex-start; }
-    .checkout-summary, .checkout-form { flex:1 1 420px; background:#151515; border:1px solid #2b2b2b; border-radius:12px; padding:1.5rem; box-shadow:0 8px 30px rgba(0,0,0,0.6); }
-    .checkout-summary h2, .checkout-form h2 { color:#c7a86c; font-size:1.3rem; margin-bottom:1rem; border-bottom:1px solid #2b2b2b; padding-bottom:0.6rem; }
-    .cart-item { display:flex; align-items:center; justify-content:space-between; margin-bottom:1rem; border-bottom:1px solid #232323; padding-bottom:0.6rem; }
-    .cart-item-details { flex:1; margin-left:0.75rem; }
-    .cart-item-details p { margin:0; font-size:0.95rem; line-height:1.3; }
-    .cart-item-small { color:#bdbdbd; font-size:0.85rem; margin-top:0.25rem; }
-    .total { font-weight:700; color:#c7a86c; text-align:right; font-size:1.1rem; margin-top:1rem; }
-    label { display:block; margin-bottom:0.3rem; margin-top:0.8rem; font-weight:600; color:#e5e5e5; }
-    input, textarea { width:100%; padding:0.6rem 0.8rem; border-radius:8px; border:1px solid #2a2a2a; background:#0f0f0f; color:#fff; margin-bottom:0.6rem; }
-    textarea { resize:none; }
-    .place-order { background:#c7a86c; color:#000; border:none; padding:0.8rem 1.25rem; border-radius:10px; font-weight:700; cursor:pointer; width:100%; margin-top:1rem; transition:all 0.2s ease; }
-    .place-order:disabled { opacity:0.5; cursor:not-allowed; }
-    .place-order:hover:enabled { background:#fff; }
-    .back-to-shop { display:block; margin-top:1.2rem; text-align:center; color:#c7a86c; border:1px solid #2b2b2b; border-radius:10px; padding:0.6rem 1rem; font-weight:700; text-decoration:none; }
-    .back-to-shop:hover { background:#c7a86c; color:#000; border-color:transparent; }
-    footer { text-align:center; padding:2rem 1rem; background:#000; border-top:1px solid rgba(255,255,255,0.04); color:#bbb; margin-top:2rem; }
-    @media (max-width:880px) { main { padding:1.5rem; } .checkout-container { flex-direction:column; gap:1.25rem; } }
+<main>
+<h1>Checkout</h1>
 
-    /* Stripe Checkout Button */
-    #stripeBtn {
-      width: 100%;
-      margin-top: 1rem;
-      padding: 0.9rem 1.2rem;
-      background: #c7a86c;
-      color: #000;
-      font-weight: 700;
-      border: none;
-      border-radius: 10px;
-      cursor: pointer;
-      font-size: 1rem;
-      transition: all 0.25s ease;
-      letter-spacing: 0.5px;
-    }
 
-    #stripeBtn:hover:enabled {
-      background: #e8d2a3;
-      transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(199, 168, 108, 0.35);
-    }
+<div class="checkout-container">
 
-    #stripeBtn:disabled {
-      opacity: 0.45;
-      cursor: not-allowed;
-      background: #4a4a4a;
-      color: #aaa;
-    }
 
-    .cart-item button {
-      background: transparent;
-      border: 1px solid #c7a86c;
-      color: #c7a86c;
-      padding: 0.35rem 0.7rem;
-      border-radius: 8px;
-      font-size: 0.8rem;
-      cursor: pointer;
-      transition: all 0.25s ease;
-    }
+<div class="checkout-summary">
+<h2>Order Summary</h2>
+<div id="cartItems"></div>
+<p class="total" id="totalPrice">Total: £0.00</p>
+</div>
 
-    .cart-item button:hover {
-      background: #c7a86c;
-      color: #000;
-      box-shadow: 0 4px 15px rgba(199,168,108,0.35);
-    }
-  </style>
-</head>
-<body>
-  <header>
-    <a href="shop.html"><img src="WhatsApp Image 2025-10-18 at 8.49.10 AM (1).jpeg" alt="The Nine Ball Logo"></a>
-  </header>
 
-  <main>
-    <h1>Checkout</h1>
+<div class="checkout-form">
+<h2>Shipping & Payment</h2>
 
-    <div class="checkout-container">
 
-      <!-- CART SUMMARY -->
-      <div class="checkout-summary">
-        <h2>Order Summary</h2>
-        <div id="cartItems" aria-live="polite"></div>
-        <p class="total" id="totalPrice">Total: £0.00</p>
-      </div>
+<form id="checkout-form">
+<label>Full Name</label>
+<input type="text" id="name" required>
 
-      <!-- CHECKOUT FORM -->
-      <div class="checkout-form">
-        <h2>Shipping & Payment</h2>
 
-        <form id="checkout-form" novalidate>
-          <label for="name">Full Name</label>
-          <input type="text" id="name" name="name" required>
+<label>Email</label>
+<input type="email" id="email" required>
 
-          <label for="email">Email</label>
-          <input type="email" id="email" name="email" required>
 
-          <label for="address">Address</label>
-          <textarea id="address" name="address" rows="3" required></textarea>
+<label>Address</label>
+<textarea id="address" rows="3" required></textarea>
 
-          <p>You’ll be redirected to Stripe’s secure payment page.</p>
 
-          <!-- type="button" prevents form submission (we handle redirect via JS) -->
-          <button id="stripeBtn" type="button" disabled>Pay with Stripe</button>
-        </form>
+<p>You’ll be redirected to Stripe’s secure payment page.</p>
 
-        <a href="shop.html" class="back-to-shop">← Back to Shop</a>
-      </div>
 
-    </div>
-  </main>
+<button id="stripeBtn" type="button" disabled>Pay with Stripe</button>
+</form>
 
-  <footer>
-    <p>&copy; 2025 The Nine Ball. All Rights Reserved.</p>
-    <p><a href="index.html">Back to Home</a></p>
-  </footer>
 
-  <!-- main client logic -->
-  <script src="./checkout.js"></script>
+<a href="shop.html" class="back-to-shop">← Back to Shop</a>
+</div>
+
+
+</div>
+</main>
+
+
+<footer>
+<p>© 2025 The Nine Ball</p>
+</footer>
+
+
+<script src="checkout.js"></script>
+
 <script>
-/* CART + LOCAL STORAGE LOGIC */
-const cart = JSON.parse(localStorage.getItem('cart')) || [];
-const cartItemsContainer = document.getElementById('cartItems');
-const totalPriceElem = document.getElementById('totalPrice');
+/* CART LOGIC */
+const cart = JSON.parse(localStorage.getItem("cart")) || [];
+const cartItems = document.getElementById("cartItems");
+const totalPriceElem = document.getElementById("totalPrice");
 const stripeBtn = document.getElementById("stripeBtn");
 const nameInput = document.getElementById("name");
 const emailInput = document.getElementById("email");
 const addressInput = document.getElementById("address");
 
 function renderCart() {
-  cartItemsContainer.innerHTML = "";
+  cartItems.innerHTML = "";
   let total = 0;
 
-  cart.forEach((item, index) => {
+  cart.forEach((item, i) => {
     total += parseFloat(item.price);
 
     const div = document.createElement("div");
@@ -159,25 +83,24 @@ function renderCart() {
         <p>${item.name} (${item.size})</p>
         <p class="cart-item-small">£${item.price}</p>
       </div>
-      <button data-index="${index}">Remove</button>
+      <button data-index="${i}">Remove</button>
     `;
 
     div.querySelector("button").addEventListener("click", () => {
-      cart.splice(index, 1);
+      cart.splice(i, 1);
       localStorage.setItem("cart", JSON.stringify(cart));
       renderCart();
       checkFormFields();
     });
 
-    cartItemsContainer.appendChild(div);
+    cartItems.appendChild(div);
   });
 
   totalPriceElem.textContent = `Total: £${total.toFixed(2)}`;
 }
 
 function checkFormFields() {
-  const filled = nameInput.value && emailInput.value && addressInput.value;
-  stripeBtn.disabled = !filled || cart.length === 0;
+  stripeBtn.disabled = !(nameInput.value && emailInput.value && addressInput.value && cart.length > 0);
 }
 
 [nameInput, emailInput, addressInput].forEach(input =>
@@ -186,43 +109,40 @@ function checkFormFields() {
 
 renderCart();
 checkFormFields();
-</script>
 
-<!-- WORKING STRIPE CHECKOUT -->
-<script>
-stripeBtn.addEventListener("click", async () => {
-  const total = cart.reduce((sum, item) => sum + parseFloat(item.price), 0);
+stripeBtn.addEventListener('click', async () => {
+  try {
+    stripeBtn.disabled = true;
+    stripeBtn.textContent = "Redirecting...";
 
-  const response = await fetch("http://localhost:3000/api/create-checkout", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      total: total,
-      customerEmail: emailInput.value
-    })
-  });
+    const total = cart.reduce((sum, item) => sum + (parseFloat(item.price) || 0), 0);
 
-  const data = await response.json();
+    const response = await fetch("https://api.thenineball.co.uk/api/create-checkout", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        total,
+        customerEmail: emailInput.value.trim(),
+        metadata: {
+          name: nameInput.value.trim(),
+          address: addressInput.value.trim(),
+          cart: JSON.stringify(cart)
+        }
+      })
+    });
 
-  if (data.url) {
+    const data = await response.json();
+    if (!response.ok) throw new Error(data.error || "Checkout failed");
+
     window.location.href = data.url;
-  } else {
-    alert("Stripe error — session was not created.");
+
+  } catch (err) {
+    alert("Error: " + err.message);
+    stripeBtn.disabled = false;
+    stripeBtn.textContent = "Pay with Stripe";
   }
 });
 
-const menuToggle = document.getElementById('menuToggle');
-const navLinks = document.getElementById('navLinks');
-
-menuToggle.addEventListener('click', () => {
-  navLinks.classList.toggle('show');
-});
-
-
-
- 
-
 </script>
-
 </body>
 </html>
