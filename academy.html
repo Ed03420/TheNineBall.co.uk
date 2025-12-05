@@ -231,7 +231,7 @@
     <div style="flex:1;min-width:240px">
       <p>📍 <strong>59 Harpur Street, MK40 2SR</strong></p>
       <p>📞 <a href="tel:07926718246" style="color:#c7a86c">07926 718246</a></p>
-      <p class="small">Open daily 10:30 — 21:00</p>
+      <p class="small">Open daily 10:30 — 16:30</p>
     </div>
     <div style="flex:1;min-width:240px">
       <p class="small">For course enquiries: <a href="mailto:thenineballtattoostudio@hotmail.com" style="color:#c7a86c">thenineballtattoostudio@hotmail.com</a></p>
@@ -251,17 +251,19 @@
 <script>
  // ===== INIT DATA =====
 const defaultSeats = 4;
-const courses = JSON.parse(localStorage.getItem('academyDatesV2')) || [
-  {id:'2026-01-05', label:'Mon 5th Jan 2026', seatsLeft:defaultSeats}, // Will reset below
-  {id:'2026-02-02', label:'Mon 2nd Feb 2026', seatsLeft:defaultSeats},
-  {id:'2026-03-02', label:'Mon 2nd Mar 2026', seatsLeft:defaultSeats},
-  {id:'2026-04-06', label:'Mon 6th Apr 2026', seatsLeft:defaultSeats},
-  {id:'2026-05-04', label:'Mon 4th May 2026', seatsLeft:defaultSeats},
-  {id:'2026-06-01', label:'Mon 1st Jun 2026', seatsLeft:defaultSeats},
-  {id:'2026-07-06', label:'Mon 6th Jul 2026', seatsLeft:defaultSeats},
-  {id:'2026-09-07', label:'Mon 7th Sep 2026', seatsLeft:defaultSeats},
-  {id:'2026-10-05', label:'Mon 5th Oct 2026', seatsLeft:defaultSeats},
-  {id:'2026-11-02', label:'Mon 2nd Nov 2026', seatsLeft:defaultSeats},
+const courses = [
+{id:'2026-01-19', label:'Mon 19th Jan 2026', seatsLeft:defaultSeats},
+{id:'2026-02-16', label:'Mon 16th Feb 2026', seatsLeft:defaultSeats},
+{id:'2026-03-16', label:'Mon 16th Mar 2026', seatsLeft:defaultSeats},
+{id:'2026-04-13', label:'Mon 13th Apr 2026', seatsLeft:defaultSeats},
+{id:'2026-05-18', label:'Mon 18th May 2026', seatsLeft:defaultSeats},
+{id:'2026-06-15', label:'Mon 15th Jun 2026', seatsLeft:defaultSeats},
+{id:'2026-07-20', label:'Mon 20th Jul 2026', seatsLeft:defaultSeats},
+{id:'2026-08-17', label:'Mon 17th Aug 2026', seatsLeft:defaultSeats},
+{id:'2026-09-14', label:'Mon 14th Sep 2026', seatsLeft:defaultSeats},
+{id:'2026-10-19', label:'Mon 19th Oct 2026', seatsLeft:defaultSeats},
+{id:'2026-11-16', label:'Mon 16th Nov 2026', seatsLeft:defaultSeats},
+{id:'2026-12-07', label:'Mon 7th Dec 2026', seatsLeft:defaultSeats},
 ];
 
 // ===== RESET MON 5TH JAN =====

@@ -4,870 +4,518 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>The Nine Ball Shop</title>
+
   <style>
-    /* ============================================
-   UNIVERSAL MOBILE-FRIENDLY RESPONSIVE FIXES
-   ============================================ */
-
-/* Make everything scale properly on all screens */
-html {
-  width: 100%;
-  overflow-x: hidden;
-}
-
-body {
-  max-width: 100%;
-  overflow-x: hidden;
-}
-
-/* Images automatically scale */
-img {
-  max-width: 100%;
-  height: auto;
-}
-
-/* Prevent any container from breaking the screen */
-* {
-  box-sizing: border-box !important;
-}
-
-/* Universal responsive typography */
-h1 { font-size: clamp(1.8rem, 5vw, 3rem); }
-h2 { font-size: clamp(1.4rem, 4vw, 2.2rem); }
-h3 { font-size: clamp(1.2rem, 3.5vw, 1.8rem); }
-p  { font-size: clamp(0.9rem, 3vw, 1.1rem); }
-
-/* Universal responsive grid helper */
-.responsive-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-  gap: 1.2rem;
-}
-
-/* Make buttons easier to tap */
-button, a {
-  padding: 0.7rem 1rem;
-  font-size: 1rem;
-  border-radius: 10px;
-}
-
-/* Mobile layout improvements */
-@media (max-width: 900px) {
-  
-  /* Keep all sections tight and readable */
-  section {
-    padding: 1.5rem 1rem !important;
-  }
-
-  /* Shrink large headers and hero banners */
-  .hero {
-    height: 65vh !important;
-    background-attachment: scroll !important;
-  }
-
-  /* Prevent big fixed headers from covering content */
-  body {
-    padding-top: 90px !important;
-  }
-
-  /* Make any side panel fullscreen on mobile */
-  .panel,
-  #cartPanel {
-    width: 100% !important;
-    border-radius: 0 !important;
-  }
-
-  /* Collapse navigation automatically */
-  nav ul, .nav-links {
-    flex-direction: column !important;
-    gap: 0.6rem !important;
-    text-align: right;
-  }
-}
-
-    /* ===== GLOBAL STYLES ===== */
+    /* ==============================
+       UNIVERSAL STYLES
+    ============================== */
     * { margin:0; padding:0; box-sizing:border-box; }
-    html, body { width:100%; height:100%; font-family:'Poppins', sans-serif; background:#0e0e0e; color:#fff; scroll-behavior:smooth; }
+    html, body {
+      width:100%; height:100%;
+      font-family:'Poppins', sans-serif;
+      background:#0e0e0e;
+      color:#fff;
+      scroll-behavior:smooth;
+    }
     body { padding-top:140px; }
 
-    /* ===== HEADER ===== */
+    h1 { font-size: clamp(1.8rem, 5vw, 3rem); }
+    h2 { font-size: clamp(1.4rem, 4vw, 2.2rem); }
+    h3 { font-size: clamp(1.2rem, 3.5vw, 1.8rem); }
+    p  { font-size: clamp(0.9rem, 3vw, 1.1rem); }
 
+    img { max-width:100%; height:auto; border-radius:12px; }
 
-header.scrolled {
-  padding: 6px 0;      /* slightly smaller */
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-}
+    a { text-decoration:none; color:#c7a86c; transition: color 0.3s ease; }
+    a:hover { color:#fff; }
 
-    #mainHeader { position: fixed; top: 0; left: 0; padding: 20px 0; width: 100%;  z-index: 9999; height: 200px; background: rgba(0, 0, 0, 0.9); z-index: 1000; padding: 1rem 1rem; transition: padding 0.3s ease, background 0.3s ease; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
-    #mainHeader.shrink { height: 80px; }
-    #mainHeader.shrink .centered-header { padding: 0.5rem 1rem; transition: height 0.3s ease; }
-    #mainHeader.shrink .nav-links { margin-top: 0.35rem; font-size: 0.95rem; }
-    .centered-header { display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:1.5rem 1rem; position:relative; transition: all 0.4s ease; }
-    .brand img { height: 110px; width:auto; border-radius:10px; transition: all 0.4s ease; }
-    .nav-links { margin-top:1rem; display:flex; gap:1.5rem; justify-content:center; flex-wrap:wrap; transition: all 0.4s ease; }
-    .nav-links a { font-weight:600; color:#fff; transition:color 0.3s ease; text-decoration:none; }
-    .nav-links a:hover { color:#c7a86c; }
-    .menu-toggle { display:none; position:absolute; right:1rem; top:1.5rem; background:none; border:none; cursor:pointer; z-index:1100; }
-    .menu-toggle svg { fill:#fff; }
-    .brand a img { transition: transform 0.4s ease, box-shadow 0.4s ease; }
-    .brand a:hover img { transform: scale(1.1); box-shadow: 0 0 20px #c7a86c, 0 0 40px #c7a86c, 0 0 60px #c7a86c; cursor: pointer; }
+    /* ==============================
+       HEADER
+    ============================== */
+    #mainHeader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: rgba(0,0,0,0.95);
+      z-index: 1000;
+      padding: 1rem 1rem;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+      transition: all 0.3s ease;
+    }
 
-    /* Optional: subtle glowing pulse */
-    @keyframes logoGlow { 0%, 100% { box-shadow: 0 0 20px #c7a86c, 0 0 40px #c7a86c, 0 0 60px #c7a86c; } 50% { box-shadow: 0 0 10px #c7a86c, 0 0 20px #c7a86c, 0 0 30px #c7a86c; } }
-    .brand a:hover img { animation: logoGlow 1.5s infinite alternate; }
+    #mainHeader.shrink {
+      padding: 0.5rem 1rem;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+    }
 
-    .coming-soon-section { padding: 4rem 5%; background: linear-gradient(135deg, #111, #1a1a1a); border-radius: 12px; text-align: center; margin: 4rem auto; box-shadow: 0 0 30px rgba(199,168,108,0.2); }
-    .coming-soon-section h2 { color: #c7a86c; font-size: 2.5rem; margin-bottom: 1rem; }
-    .coming-soon-section p { color: #ddd; font-size: 1.1rem; line-height: 1.6; margin-bottom: 2rem; }
-    .notify-btn { display: inline-block; background: #c7a86c; color: #000; padding: 0.85rem 1.5rem; border-radius: 12px; font-weight: 700; text-decoration: none; transition: all 0.3s ease; }
-    .notify-btn:hover { background: #fff; color: #c7a86c; box-shadow: 0 0 15px #c7a86c; transform: scale(1.05); }
+    .centered-header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
 
-    /* ===== CART BUTTON ===== */
-    #cartToggle { position: fixed; top: 20px; right: 20px; cursor: pointer; display: flex; align-items: center; background: none; border: none; z-index: 2000; }
-    #cart-count { position: absolute; top: -4px; right: -4px; background: #c7a86c; color: #000; font-size: 0.8rem; font-weight: 600; border-radius: 50%; width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 5px rgba(199,168,108,0.7); }
+    .brand img {
+      height: 110px;
+      width: auto;
+      border-radius: 10px;
+      transition: all 0.3s ease;
+    }
 
-    /* ===== CART PANEL ===== */
-    #cartPanel { position: fixed; top: 0; right: 0; width: 380px; height: 100%; background: #111; backdrop-filter: blur(10px); color: #fff; padding: 2rem 1.5rem; z-index: 2000; transition: transform 0.4s ease-in-out; transform: translateX(100%); display: flex; flex-direction: column; box-shadow: -4px 0 20px rgba(0,0,0,0.5); border-left: 2px solid #c7a86c; border-radius: 12px 0 0 12px; }
-    #cartPanel.show { transform: translateX(0); }
-    #cartPanel .cart-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:1.5rem; }
-    #cartPanel .cart-header h3 { font-size:1.6rem; font-weight:700; color:#c7a86c; }
-    #closeCartPanel { background:none; color:#c7a86c; border:none; font-size:1.6rem; cursor:pointer; transition: transform 0.2s ease; }
-    #closeCartPanel:hover { transform:scale(1.2); color:#fff; }
-    #cartItems { list-style:none; padding:0; flex-grow:1; overflow-y:auto; display:flex; flex-direction:column; gap:0.8rem; }
-    #cartItems li { display:flex; justify-content:space-between; align-items:center; padding:0.6rem 0.4rem; border-bottom:1px solid rgba(199,168,108,0.2); border-radius:8px; transition: background 0.3s ease; gap:0.5rem; }
-    #cartItems li:hover { background: rgba(199,168,108,0.08); }
-    .cart-item-info { display:flex; flex-direction:column; gap:0.25rem; max-width:160px; }
-    .cart-item-controls { display:flex; gap:0.4rem; align-items:center; }
-    .cart-item-controls button { background:#c7a86c; color:#000; border:none; padding:0.35rem 0.6rem; border-radius:6px; cursor:pointer; font-weight:600; transition: all 0.3s ease; }
-    .cart-item-controls button:hover { background:#fff; color:#c7a86c; transform:scale(1.05); }
-    .cart-footer { margin-top:1rem; display:flex; flex-direction:column; gap:1rem; }
-    #cartTotal { font-weight:700; font-size:1.2rem; color:#c7a86c; text-align:right; border-top:1px solid rgba(199,168,108,0.2); padding-top:0.5rem; }
-    #checkoutBtn { background:#c7a86c; color:#000; border:none; padding:0.8rem 1.2rem; border-radius:8px; font-weight:700; cursor:pointer; transition: all 0.3s ease; }
-    #checkoutBtn:hover { background:#fff; color:#c7a86c; box-shadow:0 4px 12px rgba(199,168,108,0.4); transform:scale(1.05); }
+    #mainHeader.shrink .brand img { height: 70px; }
 
-    /* ===== HERO ===== */
-    .hero { position: relative; height: 87vh; background-image: url('cover-tatto.jpg'); background-attachment: fixed; background-size: cover; background-position: center right; display:flex; align-items:center; justify-content:center; text-align:center; color:#fff; overflow:hidden; animation: zoomHero 20s ease-in-out infinite alternate; }
-    @keyframes zoomHero { from { background-size: 100%; } to { background-size: 110%; } }
-    .hero::after { content:""; position:absolute; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); }
-    .hero-content { position:relative; z-index:1; max-width:700px; padding:0 1.5rem; opacity:0; transform:translateY(20px); animation: fadeInUp 1.2s ease forwards; }
-    @keyframes fadeInUp { to { opacity:1; transform:translateY(0); } }
-    .hero-content h1 { font-size:3rem; color:#c7a86c; margin-bottom:1rem; letter-spacing:1px; }
-    .hero-content p { font-size:1.1rem; line-height:1.6; opacity:0.9; }
-    .scroll-down { position:absolute; bottom:30px; left:50%; transform:translateX(-50%); font-size:2rem; color:#c7a86c; cursor:pointer; animation: bounce 2s infinite, glowPulse 3s ease-in-out infinite; text-shadow: 0 0 8px rgba(199,168,108,0.6); transition: color 0.3s ease, text-shadow 0.3s ease; z-index:2; }
-    @keyframes bounce { 0%,20%,50%,80%,100% { transform:translate(-50%,0); } 40% { transform:translate(-50%,-10px); } 60% { transform:translate(-50%,-5px); } }
-    @keyframes glowPulse { 0%,100% { text-shadow:0 0 8px rgba(199,168,108,0.5); } 50% { text-shadow:0 0 20px rgba(199,168,108,1); } }
-    .scroll-down:hover { color:#fff; text-shadow:0 0 20px rgba(255,255,255,0.9); }
+    .centered-header h2 {
+      margin-top: 0.3rem;
+      font-size: 1.4rem;
+      color: #c7a86c;
+      letter-spacing: 2px;
+      transition: all 0.3s ease;
+    }
 
-    /* ===== PRODUCT SECTION ===== */
+    /* ==============================
+       NAVIGATION
+    ============================== */
+    .nav-links {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-top: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .nav-links a.nav-btn {
+      color: #c7a86c;
+      font-weight: 600;
+      font-size: 1.1rem;
+      padding: 0.5rem 1rem;
+      border: 2px solid #c7a86c;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+    }
+
+    .nav-links a.nav-btn:hover {
+      background: #c7a86c;
+      color: #000;
+      transform: scale(1.05);
+      text-shadow: 0 0 6px #fff;
+    }
+
+    /* ==============================
+       HERO
+    ============================== */
+    .hero {
+      height:87vh;
+      background-image:url('cover-tatto.jpg');
+      background-size:cover;
+      background-position:center right;
+      background-attachment:fixed;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      position:relative;
+      animation:zoomHero 20s ease-in-out infinite alternate;
+    }
+
+    @keyframes zoomHero {
+      from { background-size:100%; }
+      to { background-size:110%; }
+    }
+
+    .hero::after {
+      content:"";
+      position:absolute;
+      top:0; left:0;
+      width:100%; height:100%;
+      background:rgba(0,0,0,0.6);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index:1;
+      max-width:700px;
+      padding:0 1.5rem;
+    }
+
+    .hero-content h1 {
+      font-size:3rem;
+      color:#c7a86c;
+      margin-bottom:1rem;
+    }
+
+    /* Scroll-down arrow */
+    .scroll-down {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 2.5rem;
+      color: #c7a86c;
+      cursor: pointer;
+      text-shadow: 0 0 8px #c7a86c;
+      animation: bounce 1.6s infinite ease-in-out;
+      background: rgba(0,0,0,0.5);
+      padding: 0.3rem 0.8rem;
+      border-radius: 50%;
+      z-index: 10;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translate(-50%, 0); }
+      50% { transform: translate(-50%, -10px); }
+    }
+
+    /* ==============================
+       PRODUCT SECTION
+    ============================== */
     .product-section { padding:3rem 5%; }
-    .product-section h2 { color:#c7a86c; font-size:2rem; text-align:center; margin-bottom:2rem; }
-    .category-banner { text-align:center; padding:2rem 1rem; margin-bottom:2rem; margin-top:4rem; border-radius:12px; background:linear-gradient(135deg, #1a1a1a, #000); box-shadow:0 0 20px rgba(199,168,108,0.2); }
-    .category-banner h3 { color:#c7a86c; font-size:1.8rem; margin-bottom:0.5rem; }
-    .category-banner p { color:#ddd; font-size:1rem; opacity:0.8; }
-    .product-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(230px,1fr)); gap:2rem; justify-items:center; margin-bottom:4rem; }
-    .product-card { background:#1a1a1a; border:1px solid #2a2a2a; border-radius:16px; padding:1.5rem; text-align:center; max-width:260px; transition:transform 0.3s ease, box-shadow 0.3s ease; position:relative; cursor:pointer; }
-    .product-card:hover { transform:translateY(-8px); box-shadow:0 0 20px rgba(199,168,108,0.25); border-color:#c7a86c; }
-    .product-card img { width:100%; height:200px; object-fit:cover; border-radius:12px; margin-bottom:1rem; }
-    .product-card h3 { font-size:1.1rem; color:#fff; margin-bottom:0.5rem; }
-    .product-card p { color:#c7a86c; margin-bottom:1rem; font-weight:600; }
-    .add-to-cart { background: linear-gradient(135deg, #000, #222); color: #fff; border:none; padding:0.7rem 1.2rem; border-radius:8px; cursor:pointer; font-weight:600; transition: all 0.3s ease; }
-    .add-to-cart:hover { background:#c7a86c; color:#000; transform:scale(1.05); box-shadow:0 4px 12px rgba(199,168,108,0.5); }
 
-    /* ===== CONTACT INFO + FOOTER ===== */
-    .contact-info-footer { background: #0e0e0e; color: #fff; padding: 2rem 5%; display: flex; flex-direction: column; gap: 1.5rem; border-top: 2px solid #c7a86c; }
-    .contact-info { display: flex; flex-direction: column; gap: 0.5rem; font-size: 1rem; color: #ccc; }
-    .contact-info p { display: flex; align-items: center; gap: 0.5rem; }
-    .contact-info p span { color: #c7a86c; font-weight: 600; }
-    .contact-info a { color: #c7a86c; text-decoration: none; font-weight: 600; transition: color 0.3s ease; }
-    .contact-info a:hover { color: #fff; }
-    .footer { text-align: center; font-size: 0.95rem; color: #aaa; border-top: 1px solid rgba(199,168,108,0.2); padding-top: 1rem; }
-    .footer a { color: #c7a86c; text-decoration: none; font-weight: 600; transition: color 0.3s ease; }
-    .footer a:hover { color: #fff; }
+    .category-banner {
+      text-align:center;
+      padding:2rem 1rem;
+      margin:4rem 0 2rem 0;
+      border-radius:12px;
+      background:linear-gradient(135deg, #1a1a1a, #000);
+      box-shadow:0 0 20px rgba(199,168,108,0.2);
+    }
 
-    #backToTop { position: fixed; bottom: 30px; right: 30px; width: 45px; height: 45px; font-size: 1.2rem; border: none; border-radius: 50%; background: #c7a86c; color: #000; cursor: pointer; opacity: 0; visibility: hidden; transition: all 0.3s ease; z-index: 9999; }
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 2.5rem;
+      justify-items: center;
+    }
 
+    .product-card {
+      background: #1a1a1a;
+      border: 1px solid #2a2a2a;
+      border-radius: 18px;
+      padding: 1.2rem;
+      text-align: center;
+      max-width: 250px;
+      cursor: pointer;
+      transition: transform 0.25s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+      text-decoration: none;
+      color: inherit;
+      display: block;
+    }
 
+    .product-card img {
+      border-radius: 12px;
+      transition: transform 0.3s ease;
+    }
 
-    /* ===== UNIVERSAL MOBILE FRIENDLY FIXES ===== */
-@media (max-width: 900px) {
-  /* Make header smaller on mobile */
-  #mainHeader {
-    height: auto !important;
-    padding: 0.5rem 1rem !important;
-  }
+    .product-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 0 12px rgba(199,168,108,0.6), 0 0 25px rgba(199,168,108,0.4);
+      border-color: #c7a86c;
+    }
 
-  .centered-header {
-    padding: 0.5rem 1rem !important;
-  }
+    .product-card:hover img { transform: scale(1.06); }
 
-  .brand img {
-    height: 70px !important;
-  }
+    .product-card h3 { margin-top: 0.6rem; color: #fff; font-size: clamp(0.9rem, 2vw, 1.1rem); font-weight: 600; }
+    .product-card p { margin-top: 0.3rem; color: #c7a86c; font-size: clamp(0.75rem, 1.7vw, 0.95rem); font-weight: 600; }
 
-  /* Navigation collapses into mobile menu */
-  
+    /* ==============================
+       COMING SOON
+    ============================== */
+    .coming-soon-section {
+      padding:4rem 5%;
+      text-align:center;
+      background:linear-gradient(135deg, #111, #1a1a1a);
+      margin:4rem auto;
+      border-radius:12px;
+      box-shadow:0 0 30px rgba(199,168,108,0.2);
+    }
 
-  .nav-links a {
-    font-size: 1rem;
-    padding: 0.4rem 0;
-  }
+    /* ==============================
+       FOOTER
+    ============================== */
+    .contact-info-footer {
+      padding:2rem 5%;
+      background:#0e0e0e;
+      border-top:2px solid #c7a86c;
+    }
 
+    .contact-info p span { color:#c7a86c; font-weight:600; }
 
-  body {
-    padding-top: 110px !important;
-  }
+    .footer { text-align:center; margin-top:1rem; color:#aaa; }
 
-  /* Hero section */
-  .hero {
-    height: 70vh !important;
-    background-attachment: scroll !important;
-    background-position: center !important;
-  }
-
-  .hero-content h1 {
-    font-size: 2rem !important;
-  }
-
-  .hero-content p {
-    font-size: 1rem !important;
-  }
-
-  /* Product grid */
-  .product-grid {
-    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)) !important;
-    gap: 1.2rem !important;
-  }
-
-  .product-card {
-    padding: 1rem !important;
-    max-width: 100% !important;
-  }
-
-  .product-card img {
-    height: 150px !important;
-  }
-
-  /* Cart panel */
-  #cartPanel {
-    width: 100% !important;
-    border-radius: 0 !important;
-  }
-
-  /* Footer */
-  .contact-info-footer {
-    text-align: center !important;
-  }
-}
-
-/* Extra small phones (iPhone SE / older Android) */
-@media (max-width: 480px) {
-  .hero-content h1 {
-    font-size: 1.6rem !important;
-  }
-  .hero-content p {
-    font-size: 0.9rem !important;
-  }
-  .product-card img {
-    height: 130px !important;
-  }
-}
-/* Always show nav on all screen sizes */
-.nav-links {
-  display: flex !important;
-  position: static !important;
-  background: none !important;
-  flex-direction: row !important;
-  gap: 1.5rem !important;
-}
-
+    /* ==============================
+       BACK TO TOP BUTTON
+    ============================== */
+    #backToTop {
+      display: none;
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      z-index: 999;
+      font-size: 1.5rem;
+      background: #c7a86c;
+      color: #000;
+      border: none;
+      padding: 0.5rem 0.8rem;
+      border-radius: 50%;
+      cursor: pointer;
+      box-shadow: 0 0 10px #c7a86c;
+      transition: transform 0.3s ease, background 0.3s ease;
+    }
+    #backToTop:hover { transform: scale(1.1); }
 
   </style>
 </head>
 <body>
 
-  <!-- ===== HEADER ===== -->
-  <header id="mainHeader">
-    <div class="centered-header">
+<header id="mainHeader">
+  <div class="centered-header">
+    <a href="index.html" class="logo-link">
       <div class="brand">
-        <a href="index.html">
-          <img src="WhatsApp Image 2025-10-18 at 8.49.10 AM (1).jpeg" alt="The Nine Ball Logo">
-        </a>
+        <img src="WhatsApp Image 2025-10-18 at 8.49.10 AM (1).jpeg" alt="The Nine Ball Logo">
+        <h2>The Nine Ball</h2>
       </div>
+    </a>
 
-      <nav class="nav-links" id="navLinks">
-        <a href="#aftercare">Aftercare</a>
-        <a href="#clothing">Clothing</a>
-        <a href="#about">About</a>
-        <a href="#contact">Contact</a>
-      </nav>
+    <nav class="nav-links">
+      <a href="shop.html" class="nav-btn">Shop</a>
+      <a href="#aftercare" class="nav-btn">Aftercare</a>
+      <a href="#coming-soon" class="nav-btn">Clothing</a>
+      <a href="#halloween" class="nav-btn">Seasonal</a>
+    </nav>
+  </div>
+</header>
 
-    </div>
-  </header>
-<div class="responsive-grid"></div>
-  <!-- ===== CART BUTTON & PANEL ===== -->
-  <button id="cartToggle" aria-label="Toggle cart">
-    <svg xmlns="http://www.w3.org/2000/svg" fill="#c7a86c" viewBox="0 0 24 24" width="32" height="32" aria-hidden="true">
-      <path d="M7 4h-2l-3 9v2h2v7h2v-7h12v7h2v-7h2v-2l-3-9h-2l1 3h-14l1-3zm0 2h10l2.25 6h-14.5l2.25-6zm-2 14c-1.104 0-2 .896-2 2s.896 2 2 2 2-.896 2-2-.896-2-2-2zm14 0c-1.104 0-2 .896-2 2s.896 2 2 2 2-.896 2-2-.896-2-2-2z"/>
-    </svg>
-    <span id="cart-count">0</span>
-  </button>
+<div class="scroll-down" id="scrollDown">↓</div>
+<button id="backToTop" title="Back to Top">↑</button>
 
-  <div id="cartPanel" aria-hidden="true">
-    <div class="cart-header">
-      <h3>Your Cart</h3>
-      <button id="closeCartPanel" aria-label="Close cart">&times;</button>
-    </div>
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <h1>The Nine Ball Shop</h1>
+    <p>Explore our exclusive range of aftercare essentials and apparel — designed with precision and creativity that define <strong>The Nine Ball</strong>.</p>
+  </div>
+</section>
 
-    <ul id="cartItems" aria-live="polite"></ul>
+<!-- ALL PRODUCT COLLECTIONS -->
+<section id="aftercare" class="product-section">
 
-    <div class="cart-footer">
-      <div id="cartTotal">Total: £0.00</div>
-      <button id="checkoutBtn">Checkout</button>
-    </div>
+  <!-- AUTUMN COLLECTION -->
+  <div class="category-banner" style="background:linear-gradient(135deg,#3a2410,#1a1a1a);">
+    <h3>🍂 Autumn Collection</h3>
+    <p>Warm, cozy scents for the season.</p>
+  </div>
+  <div class="product-grid">
+    <a href="cloves.html" class="product-card">
+      <img src="cloves.jpg" alt="Cloves Balm">
+      <h3>Cloves Balm</h3>
+      <p>£7.00 (60ml)</p>
+    </a>
+    <a href="gingerbread.html" class="product-card">
+      <img src="gingerbread.jpg" alt="Gingerbread Balm">
+      <h3>Gingerbread Balm</h3>
+      <p>£7.00 (60ml)</p>
+    </a>
+    <a href="cinnamon.html" class="product-card">
+      <img src="cinnamon.jpg" alt="Cinnamon Balm">
+      <h3>Cinnamon Balm</h3>
+      <p>£7.00 (60ml)</p>
+    </a>
+    <a href="nutmeg.html" class="product-card">
+      <img src="nutmeg.jpg" alt="Nutmeg Balm">
+      <h3>Nutmeg Balm</h3>
+      <p>£7.00 (60ml)</p>
+    </a>
+    <a href="pumpkinspice.html" class="product-card">
+      <img src="pumpkinspice.jpg" alt="Pumpkin Spice Balm">
+      <h3>Pumpkin Spice Balm</h3>
+      <p>£7.00 (60ml)</p>
+    </a>
   </div>
 
-  <!-- ===== HERO & PRODUCT SECTIONS ===== -->
-  <section class="hero">
-    <div class="hero-content">
-      <h1>The Nine Ball Shop</h1>
-      <p>Explore our exclusive range of aftercare essentials and apparel — designed with precision, quality, and creativity that define <strong>The Nine Ball</strong>.</p>
-    </div>
-    <div class="scroll-down" aria-hidden="true">↓</div>
-  </section>
+  <!-- FRUITY COLLECTION -->
+  <div class="category-banner" style="background:linear-gradient(135deg,#003300,#1a1a1a);">
+    <h3>🍎 Fruity Collection</h3>
+    <p>Fresh and juicy aromas.</p>
+  </div>
+  <div class="product-grid">
+    <a href="greenapple.html" class="product-card">
+      <img src="greenapple.jpg" alt="Green Apple Balm">
+      <h3>Green Apple Balm</h3>
+      <p>£7.00</p>
+    </a>
+    <a href="blueberry.html" class="product-card">
+      <img src="blueberry.jpg" alt="Blueberry Balm">
+      <h3>Blueberry Balm</h3>
+      <p>£7.00</p>
+    </a>
+    <a href="watermelon.html" class="product-card">
+      <img src="watermelon.jpg" alt="Watermelon Balm">
+      <h3>Watermelon Balm</h3>
+      <p>£7.00</p>
+    </a>
+    <a href="grape.html" class="product-card">
+      <img src="grape.jpg" alt="Grape Balm">
+      <h3>Grape Balm</h3>
+      <p>£7.00</p>
+    </a>
+    <a href="sweetorange.html" class="product-card">
+      <img src="swet.jpg" alt="Sweet Orange Balm">
+      <h3>Sweet Orange Balm</h3>
+      <p>£7.00</p>
+    </a>
+    <a href="pineapple.html" class="product-card">
+      <img src="pineapple.jpg" alt="Pineapple Balm">
+      <h3>Pineapple Balm</h3>
+      <p>£7.00</p>
+    </a>
+  </div>
 
-  <section id="aftercare" class="product-section">
-    <!-- ===== AUTUMN COLLECTION ===== -->
-    <div class="category-banner" style="background:linear-gradient(135deg, #3a2410, #1a1a1a);">
-      <h3>🍂 Autumn Collection</h3>
-      <p>Warm, cozy scents for the season.</p>
-    </div>
+  <!-- SWEET COLLECTION -->
+  <div class="category-banner" style="background:linear-gradient(135deg,#4b004b,#1a1a1a);">
+    <h3>🍬 Sweet Collection</h3>
+    <p>Dessert-inspired scents.</p>
+  </div>
+  <div class="product-grid">
+    <a href="tutti-frutti.html" class="product-card">
+      <img src="tutti-fruity.jpg" alt="Tutti-Frutti Balm">
+      <h3>Tutti-Frutti Balm</h3>
+      <p>£7.00</p>
+    </a>
+    <a href="toasted-marshmellow.html" class="product-card">
+      <img src="toasted-marshmellow.jpg" alt="Toasted Marshmallow Balm">
+      <h3>Toasted Marshmallow</h3>
+      <p>£7.00</p>
+    </a>
+    <a href="candyfloss.html" class="product-card">
+      <img src="candyfloss.jpg" alt="Candy Floss Balm">
+      <h3>Candy Floss</h3>
+      <p>£7.00</p>
+    </a>
+    <a href="bubblegum.html" class="product-card">
+      <img src="bubblegum.jpg" alt="Bubblegum Balm">
+      <h3>Bubblegum</h3>
+      <p>£7.00</p>
+    </a>
+    <a href="chocolate.html" class="product-card">
+      <img src="chocolate.jpg" alt="Chocolate Balm">
+      <h3>Chocolate Balm</h3>
+      <p>£7.00</p>
+    </a>
+  </div>
 
-    <div class="product-grid">
-      <div class="product-card" data-link="cloves.html" data-name="Cloves Balm" data-price="7.00" data-size="60ml">
-        <img src="cloves.jpg" alt="Cloves Balm">
-        <h3>Cloves Balm</h3>
-        <p>£7.00 (60ml)</p>
-        <button class="add-to-cart">ADD TO CART</button>
-      </div>
+  <!-- HALLOWEEN COLLECTION -->
+   <div id="halloween"
+  <div class="category-banner" style="background:linear-gradient(135deg,#301000,#000);">
+    <h3>🎃 Halloween Special</h3>
+    <p>Limited spooky scents.</p>
+  </div>
+  <div class="product-grid">
+    <a href="candycorn.html" class="product-card">
+      <img src="candycorn.jpg" alt="Candy Corn Balm">
+      <h3>Candy Corn</h3>
+      <p>£7.00</p>
+    </a>
+    <a href="snickers.html" class="product-card">
+      <img src="snickers.jpg" alt="Snickers Balm">
+      <h3>Snickers Balm</h3>
+      <p>£7.00</p>
+    </a>
+    <a href="popcorn.html" class="product-card">
+      <img src="popcorn.jpg" alt="Popcorn Balm">
+      <h3>Popcorn Balm</h3>
+      <p>£7.00</p>
+    </a>
+    <a href="caramelapple.html" class="product-card">
+      <img src="caramelapple.jpg" alt="Caramel Apple Balm">
+      <h3>Caramel Apple</h3>
+      <p>£7.00</p>
+    </a>
+    <a href="pumpkinpie.html" class="product-card">
+      <img src="pumpkinpie.jpg" alt="Pumpkin Pie Balm">
+      <h3>Pumpkin Pie</h3>
+      <p>£7.00</p>
+    </a>
+  </div>
 
-      <div class="product-card" data-link="gingerbread.html" data-name="Gingerbread Balm" data-price="7.00" data-size="60ml">
-        <img src="gingerbread.jpg" alt="Gingerbread Balm">
-        <h3>Gingerbread Balm</h3>
-        <p>£7.00 (60ml)</p>
-        <button class="add-to-cart">ADD TO CART</button>
-      </div>
+  <!-- ORIGINAL COLLECTION -->
+  <div class="category-banner" style="background:linear-gradient(135deg,#222,#111);">
+    <h3>🖤 Original Collection</h3>
+    <p>Simple, clean, classic.</p>
+  </div>
+  <div class="product-grid">
+    <a href="vanilla.html" class="product-card">
+      <img src="vanilla.jpg" alt="Vanilla Balm">
+      <h3>Vanilla Balm</h3>
+      <p>£7.00</p>
+    </a>
+    <a href="original.html" class="product-card">
+      <img src="original.jpg" alt="Original Balm">
+      <h3>Original Balm</h3>
+      <p>£7.00</p>
+    </a>
+  </div>
 
-      <div class="product-card" data-link="cinnamon.html" data-name="Cinnamon Balm" data-price="7.00" data-size="60ml">
-        <img src="cinnamon.jpg" alt="Cinnamon Balm">
-        <h3>Cinnamon Balm</h3>
-        <p>£7.00 (60ml)</p>
-        <button class="add-to-cart">ADD TO CART</button>
-      </div>
+</section>
 
-      <div class="product-card" data-link="nutmeg.html" data-name="Nutmeg Balm" data-price="7.00" data-size="60ml">
-        <img src="nutmeg.jpg" alt="Nutmeg Balm">
-        <h3>Nutmeg Balm</h3>
-        <p>£7.00 (60ml)</p>
-        <button class="add-to-cart">ADD TO CART</button>
-      </div>
 
-      <div class="product-card" data-link="pumpkinspice.html" data-name="Pumpkin Spice Balm" data-price="7.00" data-size="60ml">
-        <img src="pumpkinspice.jpg" alt="Pumpkin Spice Balm">
-        <h3>Pumpkin Spice Balm</h3>
-        <p>£7.00 (60ml)</p>
-        <button class="add-to-cart">ADD TO CART</button>
-      </div>
-    </div>
+<!-- Coming Soon -->
+<section id="coming-soon" class="coming-soon-section">
+  <h2>✨ Coming Soon ✨</h2>
+  <p>New products and collections are on the way!</p>
+  <a class="notify-btn" href="#">Coming Soon</a>
+</section>
 
-    <!-- ===== FRUITY COLLECTION ===== -->
-    <div class="category-banner" style="background:linear-gradient(135deg, #003300, #1a1a1a);">
-      <h3>🍎 Fruity Collection</h3>
-      <p>Fresh, sweet, and bursting with juicy aroma.</p>
-    </div>
+<!-- FOOTER -->
+<div class="contact-info-footer">
+  <p>📍 <span>59 Harpur Street, MK40 2SR</span></p>
+  <p>☕ <span>Open daily 10:30 AM - 16:30 PM</span></p>
+  <p>📞 <a href="tel:07926718246">07926 718246</a></p>
 
-    <div class="product-grid">
-      <div class="product-card" data-link="greenapple.html" data-name="Green Apple Balm" data-price="7.00" data-size="60ml">
-        <img src="greenapple.jpg" alt="Green Apple Balm">
-        <h3>Green Apple Balm</h3>
-        <p>£7.00 (60ml)</p>
-        <button class="add-to-cart">ADD TO CART</button>
-      </div>
-
-      <div class="product-card" data-link="blueberry.html" data-name="Blueberry Balm" data-price="7.00" data-size="60ml">
-        <img src="blueberry.jpg" alt="Blueberry Balm">
-        <h3>Blueberry Balm</h3>
-        <p>£7.00 (60ml)</p>
-        <button class="add-to-cart">ADD TO CART</button>
-      </div>
-
-      <div class="product-card" data-link="watermelon.html" data-name="Watermelon Balm" data-price="7.00" data-size="60ml">
-        <img src="watermelon.jpg" alt="Watermelon Balm">
-        <h3>Watermelon Balm</h3>
-        <p>£7.00 (60ml)</p>
-        <button class="add-to-cart">ADD TO CART</button>
-      </div>
-
-      <div class="product-card" data-link="grape.html" data-name="Grape Balm" data-price="7.00" data-size="60ml">
-        <img src="grape.jpg" alt="Grape Balm">
-        <h3>Grape Balm</h3>
-        <p>£7.00 (60ml)</p>
-        <button class="add-to-cart">ADD TO CART</button>
-      </div>
-
-      <div class="product-card" data-link="sweetorange.html" data-name="Sweet Orange Balm" data-price="7.00" data-size="60ml">
-        <img src="swet.jpg" alt="Sweet Orange Balm">
-        <h3>Sweet Orange Balm</h3>
-        <p>£7.00 (60ml)</p>
-        <button class="add-to-cart">ADD TO CART</button>
-      </div>
-
-      <div class="product-card" data-link="pineapple.html" data-name="Pineapple Balm" data-price="7.00" data-size="60ml">
-        <img src="pineapple.jpg" alt="Pineapple Balm">
-        <h3>Pineapple Balm</h3>
-        <p>£7.00 (60ml)</p>
-        <button class="add-to-cart">ADD TO CART</button>
-      </div>
-    </div>
-
-    <!-- ===== SWEET COLLECTION ===== -->
-    <div class="category-banner" style="background:linear-gradient(135deg, #4b004b, #1a1a1a);">
-      <h3>🍬 Sweet Collection</h3>
-      <p>Indulge your senses with dessert-inspired balms.</p>
-    </div>
-
-    <div class="product-grid">
-      <div class="product-card" data-link="tutti-frutti.html" data-name="Tutti-Frutti Balm" data-price="7.00" data-size="60ml">
-        <img src="tutti-fruity.jpg" alt="Tutti-Frutti Balm">
-        <h3>Tutti-Frutti Balm</h3>
-        <p>£7.00 (60ml)</p>
-        <button class="add-to-cart">ADD TO CART</button>
-      </div>
-
-      <div class="product-card" data-link="toasted-marshmellow.html" data-name="Toasted Marshmallow Balm" data-price="7.00" data-size="60ml">
-        <img src="toasted-marshmellow.jpg" alt="Toasted Marshmallow Balm">
-        <h3>Toasted Marshmallow Balm</h3>
-        <p>£7.00 (60ml)</p>
-        <button class="add-to-cart">ADD TO CART</button>
-      </div>
-
-      <div class="product-card" data-link="candyfloss.html" data-name="Candy Floss Balm" data-price="7.00" data-size="60ml">
-        <img src="candyfloss.jpg" alt="Candy Floss Balm">
-        <h3>Candy Floss Balm</h3>
-        <p>£7.00 (60ml)</p>
-        <button class="add-to-cart">ADD TO CART</button>
-      </div>
-
-      <div class="product-card" data-link="bubblegum.html" data-name="Bubblegum Balm" data-price="7.00" data-size="60ml">
-        <img src="bubblegum.jpg" alt="Bubblegum Balm">
-        <h3>Bubblegum Balm</h3>
-        <p>£7.00 (60ml)</p>
-        <button class="add-to-cart">ADD TO CART</button>
-      </div>
-
-      <div class="product-card" data-link="chocolate.html" data-name="Chocolate Balm" data-price="7.00" data-size="60ml">
-        <img src="chocolate.jpg" alt="Chocolate Balm">
-        <h3>Chocolate Balm</h3>
-        <p>£7.00 (60ml)</p>
-        <button class="add-to-cart">ADD TO CART</button>
-      </div>
-    </div>
-
-    <!-- ===== HALLOWEEN COLLECTION ===== -->
-    <div class="category-banner" style="background:linear-gradient(135deg, #301000, #000);">
-      <h3>🎃 Halloween Special</h3>
-      <p>Limited edition spooky scents for the season.</p>
-    </div>
-
-    <div class="product-grid">
-      <div class="product-card" data-link="candycorn.html" data-name="Candy Corn Balm" data-price="7.00" data-size="60ml">
-        <img src="candycorn.jpg" alt="Candy Corn Balm">
-        <h3>Candy Corn Balm</h3>
-        <p>£7.00 (60ml)</p>
-        <button class="add-to-cart">ADD TO CART</button>
-      </div>
-
-      <div class="product-card" data-link="snickers.html" data-name="Snickers Balm" data-price="7.00" data-size="60ml">
-        <img src="snickers.jpg" alt="Snickers Balm">
-        <h3>Snickers Balm</h3>
-        <p>£7.00 (60ml)</p>
-        <button class="add-to-cart">ADD TO CART</button>
-      </div>
-
-      <div class="product-card" data-link="popcorn.html" data-name="Popcorn Balm" data-price="7.00" data-size="60ml">
-        <img src="popcorn.jpg" alt="Popcorn Balm">
-        <h3>Popcorn Balm</h3>
-        <p>£7.00 (60ml)</p>
-        <button class="add-to-cart">ADD TO CART</button>
-      </div>
-
-      <div class="product-card" data-link="caramelapple.html" data-name="Caramel Apple Balm" data-price="7.00" data-size="60ml">
-        <img src="caramelapple.jpg" alt="Caramel Apple Balm">
-        <h3>Caramel Apple Balm</h3>
-        <p>£7.00 (60ml)</p>
-        <button class="add-to-cart">ADD TO CART</button>
-      </div>
-
-      <div class="product-card" data-link="pumpkinpie.html" data-name="Pumpkin Pie Balm" data-price="7.00" data-size="60ml">
-        <img src="pumpkinpie.jpg" alt="Pumpkin Pie Balm">
-        <h3>Pumpkin Pie Balm</h3>
-        <p>£7.00 (60ml)</p>
-        <button class="add-to-cart">ADD TO CART</button>
-      </div>
-    </div>
-
-    <!-- ===== ORIGINAL COLLECTION ===== -->
-    <div class="category-banner" style="background:linear-gradient(135deg, #222, #111);">
-      <h3>🖤 Original Collection</h3>
-      <p>Timeless classics — simple, clean, and iconic.</p>
-    </div>
-
-    <div class="product-grid">
-      <div class="product-card" data-link="vanilla.html" data-name="Vanilla Balm" data-price="7.00" data-size="60ml">
-        <img src="vanilla.jpg" alt="Vanilla Balm">
-        <h3>Vanilla Balm</h3>
-        <p>£7.00 (60ml)</p>
-        <button class="add-to-cart">ADD TO CART</button>
-      </div>
-
-      <div class="product-card" data-link="original.html" data-name="Original Balm" data-price="7.00" data-size="60ml">
-        <img src="original.jpg" alt="Original Balm">
-        <h3>Original Balm</h3>
-        <p>£7.00 (60ml)</p>
-        <button class="add-to-cart">ADD TO CART</button>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== COMING SOON SECTION ===== -->
-  <section id="coming-soon" class="coming-soon-section">
-    <div class="coming-soon-content">
-      <h2>✨ Coming Soon ✨</h2>
-      <p>We’re brewing something exciting for you! Stay tuned for new products and exclusive collections arriving soon at <strong>The Nine Ball Shop</strong>.</p>
-      <a href="index.html" class="notify-btn">Coming Soon</a>
-    </div>
-  </section>
+  <div class="footer">
+    <p>&copy; 2025 The Nine Ball. All Rights Reserved.</p>
+    <p><a href="#top">Back to Home</a></p>
+  </div>
 </div>
-  <!-- CONTACT INFO + FOOTER -->
-  <div class="contact-info-footer">
-    <div class="contact-info">
-      <p>📍 <span>59 Harpur Street, MK40 2SR</span></p>
-      <p>☕ <span>Open daily 10:30 AM - 9:00 PM</span></p>
-      <p>📞 <a href="tel:07926718246">07926 718246</a></p>
-    </div>
 
-    <footer class="footer">
-      <p>&copy; 2025 The Nine Ball. All Rights Reserved.</p>
-      <p><a href="index.html">Back to Home</a></p>
-    </footer>
-  </div>
+<script>
+  // Header shrink on scroll
+  const header = document.getElementById('mainHeader');
+  let lastScrollY = window.scrollY;
+  const shrinkThreshold = 80;
+  window.addEventListener('scroll', () => {
+    if(window.scrollY > shrinkThreshold){ header.classList.add('shrink'); }
+    else { header.classList.remove('shrink'); }
 
-  <!-- BACK TO TOP -->
-  <button id="backToTop" aria-label="Back to top">↑</button>
-
-  <script>
-
-    
-    /* --------------- CART & UI LOGIC --------------- */
-
-    // Utilities
-    const qs = (sel, ctx=document) => ctx.querySelector(sel);
-    const qsa = (sel, ctx=document) => Array.from(ctx.querySelectorAll(sel));
-
-    // Elements
-    const cartToggle = qs('#cartToggle');
-    const cartPanel = qs('#cartPanel');
-    const closeCartPanel = qs('#closeCartPanel');
-    const cartItemsList = qs('#cartItems');
-    const cartCount = qs('#cart-count');
-    const cartTotalEl = qs('#cartTotal');
-    const checkoutBtn = qs('#checkoutBtn');
-
-    // Other UI elements
-    const backToTop = qs('#backToTop');
-    const scrollDown = qs('.scroll-down');
-    const menuToggle = qs('#menuToggle');
-    const navLinks = qs('#navLinks');
-    const mainHeader = qs('#mainHeader');
-
-    // Load cart from localStorage
-    let cart = [];
-    try {
-      cart = JSON.parse(localStorage.getItem('cart')) || [];
-      if (!Array.isArray(cart)) cart = [];
-    } catch (e) {
-      cart = [];
+    if(window.innerWidth >= 768){
+      if(window.scrollY > lastScrollY && window.scrollY > shrinkThreshold){
+        header.style.transform = `translateY(-${header.offsetHeight}px)`;
+      } else { header.style.transform = 'translateY(0)'; }
     }
+    lastScrollY = window.scrollY;
+  });
 
-    // Save cart
-    function saveCart() {
-      localStorage.setItem('cart', JSON.stringify(cart));
-    }
+  // Scroll-down button
+  document.getElementById('scrollDown').addEventListener('click', () => {
+    document.querySelector('#aftercare').scrollIntoView({ behavior: 'smooth' });
+  });
 
-    // Calculate totals and item count
-    function cartTotals() {
-      let total = 0;
-      let count = 0;
-      cart.forEach(it => {
-        total += (Number(it.price) * (it.quantity || 1));
-        count += (it.quantity || 1);
-      });
-      return { total, count };
-    }
-
-    // Update badge
-    function updateCartCount() {
-      const { count } = cartTotals();
-      cartCount.textContent = count;
-    }
-
-    // Render cart items
-    function renderCart() {
-      cartItemsList.innerHTML = '';
-      if (cart.length === 0) {
-        const empty = document.createElement('li');
-        empty.textContent = 'Your cart is empty.';
-        empty.style.opacity = '0.8';
-        cartItemsList.appendChild(empty);
-        cartTotalEl.textContent = 'Total: £0.00';
-        return;
-      }
-
-      cart.forEach((item, idx) => {
-        const li = document.createElement('li');
-
-        // Left: info
-        const info = document.createElement('div');
-        info.className = 'cart-item-info';
-        const name = document.createElement('div');
-        name.textContent = item.name;
-        name.style.fontWeight = '700';
-        const meta = document.createElement('div');
-        meta.textContent = `£${Number(item.price).toFixed(2)} • ${item.size || ''}`;
-
-        info.appendChild(name);
-        info.appendChild(meta);
-
-        // Right: controls
-        const controls = document.createElement('div');
-        controls.className = 'cart-item-controls';
-
-        const qtyBtnMinus = document.createElement('button');
-        qtyBtnMinus.type = 'button';
-        qtyBtnMinus.title = 'Decrease quantity';
-        qtyBtnMinus.textContent = '−';
-
-        const qtyDisplay = document.createElement('span');
-        qtyDisplay.textContent = item.quantity || 1;
-        qtyDisplay.style.minWidth = '22px';
-        qtyDisplay.style.textAlign = 'center';
-
-        const qtyBtnPlus = document.createElement('button');
-        qtyBtnPlus.type = 'button';
-        qtyBtnPlus.title = 'Increase quantity';
-        qtyBtnPlus.textContent = '+';
-
-        const removeBtn = document.createElement('button');
-        removeBtn.type = 'button';
-        removeBtn.title = 'Remove';
-        removeBtn.textContent = 'Remove';
-        removeBtn.style.padding = '0.35rem 0.5rem';
-
-        // Event listeners for controls
-        qtyBtnMinus.addEventListener('click', () => {
-          item.quantity = Math.max(1, (item.quantity || 1) - 1);
-          saveCart();
-          renderCart();
-          updateCartCount();
-        });
-
-        qtyBtnPlus.addEventListener('click', () => {
-          item.quantity = (item.quantity || 1) + 1;
-          saveCart();
-          renderCart();
-          updateCartCount();
-        });
-
-        removeBtn.addEventListener('click', () => {
-          cart.splice(idx, 1);
-          saveCart();
-          renderCart();
-          updateCartCount();
-        });
-
-        controls.appendChild(qtyBtnMinus);
-        controls.appendChild(qtyDisplay);
-        controls.appendChild(qtyBtnPlus);
-        controls.appendChild(removeBtn);
-
-        li.appendChild(info);
-        li.appendChild(controls);
-
-        cartItemsList.appendChild(li);
-      });
-
-      const { total } = cartTotals();
-      cartTotalEl.textContent = `Total: £${total.toFixed(2)}`;
-    }
-
-    // Add item to cart
-    function addToCart(itemName, itemPrice, itemSize, imgEl = null) {
-      // If same product exists (same name & size) increase quantity
-      const match = cart.find(it => it.name === itemName && it.size === itemSize);
-      if (match) {
-        match.quantity = (match.quantity || 1) + 1;
-      } else {
-        cart.push({ name: itemName, price: Number(itemPrice), size: itemSize || '', quantity: 1 });
-      }
-
-      saveCart();
-      updateCartCount();
-      renderCart();
-      // Animation
-      if (imgEl) {
-        flyToCart(imgEl);
-      }
-      // Open panel briefly to show the added item
-      cartPanel.classList.add('show');
-    }
-
-    // Fly to cart animation
-    function flyToCart(imgEl) {
-      try {
-        const rect = imgEl.getBoundingClientRect();
-        const flyImg = document.createElement('img');
-        flyImg.src = imgEl.src;
-        flyImg.style.position = 'fixed';
-        flyImg.style.left = rect.left + 'px';
-        flyImg.style.top = rect.top + 'px';
-        flyImg.style.width = rect.width + 'px';
-        flyImg.style.height = rect.height + 'px';
-        flyImg.style.transition = 'transform 0.8s ease, opacity 0.8s ease';
-        flyImg.style.zIndex = '3000';
-        flyImg.style.borderRadius = '8px';
-        document.body.appendChild(flyImg);
-
-        const cartRect = cartToggle.getBoundingClientRect();
-        const translateX = (cartRect.left + cartRect.width/2) - (rect.left + rect.width/2);
-        const translateY = (cartRect.top + cartRect.height/2) - (rect.top + rect.height/2);
-
-        requestAnimationFrame(() => {
-          flyImg.style.transform = `translate(${translateX}px, ${translateY}px) scale(0.1)`;
-          flyImg.style.opacity = '0';
-        });
-
-        setTimeout(() => {
-          flyImg.remove();
-        }, 850);
-      } catch (e) {
-        // fail silently if animation can't run
-      }
-    }
-
-    // Attach add-to-cart button listeners and product-card click navigation
-    function setupProductCards() {
-      qsa('.product-card').forEach(card => {
-        const addBtn = card.querySelector('.add-to-cart');
-        const img = card.querySelector('img');
-        addBtn.addEventListener('click', (ev) => {
-          ev.stopPropagation();
-          const name = card.dataset.name;
-          const price = card.dataset.price;
-          const size = card.dataset.size;
-          addToCart(name, price, size, img);
-        });
-
-        // clicking the card (not the button) navigates to product page
-        card.addEventListener('click', (ev) => {
-          // If user clicked anything that is inside the add-to-cart button, ignore (already handled)
-          if (ev.target.closest('.add-to-cart')) return;
-          const link = card.dataset.link;
-          if (link) {
-            window.location.href = link;
-          }
-        });
-      });
-    }
-
-    // CART panel toggle
-    cartToggle.addEventListener('click', () => {
-      cartPanel.classList.toggle('show');
-      cartPanel.setAttribute('aria-hidden', !cartPanel.classList.contains('show'));
-    });
-
-    closeCartPanel.addEventListener('click', () => {
-      cartPanel.classList.remove('show');
-      cartPanel.setAttribute('aria-hidden', 'true');
-    });
-
-    // Close cart if clicking outside
-    document.addEventListener('click', (e) => {
-      if (cartPanel.classList.contains('show') && !cartPanel.contains(e.target) && !cartToggle.contains(e.target)) {
-        cartPanel.classList.remove('show');
-        cartPanel.setAttribute('aria-hidden', 'true');
-      }
-    });
-
-    // Checkout button (navigate to checkout page)
-    checkoutBtn.addEventListener('click', () => {
-      // You can modify behaviour to pass cart to checkout page if needed
-      window.location.href = 'checkout.html';
-    });
-
-    // Back to top button
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > 100) {
-        backToTop.style.opacity = '1';
-        backToTop.style.visibility = 'visible';
-      } else {
-        backToTop.style.opacity = '0';
-        backToTop.style.visibility = 'hidden';
-      }
-
-    const header = document.querySelector("header");
-    });
-
-    backToTop.addEventListener('click', () => {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
-
-    // Scroll down arrow
-    if (scrollDown) {
-      scrollDown.addEventListener('click', () => {
-        const target = qs('#aftercare');
-        if (target) target.scrollIntoView({ behavior: 'smooth' });
-      });
-    }
-
-
-
-    // Smooth behavior for footer "Back to Home"
-    qsa('.footer a').forEach(link => {
-      link.addEventListener('click', (e) => {
+  // Navigation smooth scroll for internal links
+  document.querySelectorAll('.nav-links a').forEach(link => {
+    link.addEventListener('click', e => {
+      const targetId = link.getAttribute('href');
+      if(targetId.startsWith('#')){
         e.preventDefault();
-        document.body.scrollIntoView({ behavior: 'smooth' });
-      });
+        document.querySelector(targetId).scrollIntoView({ behavior: 'smooth' });
+      }
     });
+  });
 
-    // Phone click console feedback (optional)
-    qsa('.contact-info a[href^="tel:"]').forEach(phone => {
-      phone.addEventListener('click', () => {
-        console.log('Dialing:', phone.textContent);
-      });
-    });
-
-    // INIT
-    document.addEventListener('DOMContentLoaded', () => {
-      setupProductCards();
-      renderCart();
-      updateCartCount();
-    });
-    
-  </script>
-  <script>
-document.getElementById("menuToggle").addEventListener("click", () => {
-  document.getElementById("navLinks").classList.toggle("show");
-});
+  // Back to top button
+  const backToTop = document.getElementById('backToTop');
+  window.addEventListener('scroll', () => {
+    backToTop.style.display = window.scrollY > 300 ? 'block' : 'none';
+  });
+  backToTop.addEventListener('click', () => window.scrollTo({ top:0, behavior:'smooth' }));
 </script>
-
 </body>
 </html>

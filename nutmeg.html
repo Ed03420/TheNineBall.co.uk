@@ -2,293 +2,123 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Nutmeg Balm - The Nine Ball Shop</title>
 <style>
-/* ENTIRE MASTER TEMPLATE CSS SAME AS Cloves PAGE */
-* { margin:0; padding:0; box-sizing:border-box; }
-body { font-family:'Poppins', sans-serif; background:#0e0e0e; color:#fff; line-height:1.6; padding-top:120px; }
-header { position:fixed; top:0; left:0; width:100%; background:rgba(0,0,0,0.95); z-index:1000; }
-.centered-header { display:flex; align-items:center; justify-content:center; padding:1rem 2rem; position:relative; }
-.brand { position:relative; display:inline-block; cursor:pointer; }
-.brand img { height:80px; width:auto; border-radius:10px; transition: all 0.4s ease; }
-.brand:hover img { transform: scale(1.1); box-shadow:0 0 20px #c7a86c; }
-#cartToggle { position:absolute; right:2rem; top:50%; transform:translateY(-50%); background:none; border:none; cursor:pointer; font-size:inherit; }
-#cart-count { position:absolute; top:-6px; right:-6px; background:#c7a86c; color:#000; font-size:0.8rem; font-weight:600; border-radius:50%; width:20px; height:20px; display:flex; align-items:center; justify-content:center; box-shadow:0 0 5px rgba(199,168,108,0.7); }
-main { max-width:980px; margin:0 auto; padding:2rem 1rem; display:flex; gap:2rem; flex-wrap:wrap; align-items:flex-start; }
-.product-image { flex:1 1 320px; min-width:260px; }
-.product-image img { width:100%; border-radius:14px; display:block; box-shadow:0 8px 30px rgba(0,0,0,0.6); }
-.product-details { flex:1 1 420px; min-width:260px; }
-.product-details h1 { font-size:2rem; color:#c7a86c; margin-bottom:0.8rem; letter-spacing:0.5px; }
-.product-details p.desc { margin-bottom:1rem; color:#e7e7e7; opacity:0.95; }
-.product-details p.features { margin-bottom:1.25rem; color:#d8d8d8; font-size:0.98rem; }
-.price { font-size:1.25rem; font-weight:700; color:#c7a86c; margin-bottom:1rem; }
-.size-select { padding:0.6rem 0.75rem; border-radius:8px; margin-bottom:1rem; background:#111; color:#fff; border:1px solid #2a2a2a; font-weight:700; cursor:pointer; }
-.cta-row { display:flex; gap:0.75rem; align-items:center; flex-wrap:wrap; }
-.add-to-cart { background:#c7a86c; color:#000; border:none; padding:0.85rem 1.25rem; border-radius:10px; font-weight:800; cursor:pointer; transition: all 0.18s ease; }
-.add-to-cart:hover { transform:translateY(-2px); }
-.back-to-shop { display:inline-block; background:transparent; color:#c7a86c; border:1px solid #2b2b2b; padding:0.6rem 1rem; border-radius:10px; font-weight:700; text-decoration:none; }
-.back-to-shop:hover { background:#c7a86c; color:#000; border-color:transparent; }
-.meta { margin-top:1.25rem; color:#bdc0bd; font-size:0.92rem; }
-#cartPanel { position: fixed; top:0; right:0; width:380px; height:100%; background:#111; backdrop-filter: blur(10px); color:#fff; padding:2rem 1.5rem; z-index:2000; transition: transform 0.4s ease-in-out; transform:translateX(100%); display:flex; flex-direction:column; box-shadow:-4px 0 20px rgba(0,0,0,0.5); border-left:2px solid #c7a86c; border-radius:12px 0 0 12px; }
-#cartPanel.show { transform:translateX(0); }
-#cartPanel .cart-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:1.5rem; }
-#cartPanel .cart-header h3 { font-size:1.6rem; font-weight:700; color:#c7a86c; }
-#closeCartPanel { background:none; color:#c7a86c; border:none; font-size:1.6rem; cursor:pointer; transition: transform 0.2s ease; }
-#closeCartPanel:hover { transform:scale(1.2); color:#fff; }
-#cartItems { list-style:none; padding:0; flex-grow:1; overflow-y:auto; display:flex; flex-direction:column; gap:0.8rem; }
-#cartItems li { display:flex; justify-content:space-between; align-items:center; padding:0.6rem 0.4rem; border-bottom:1px solid rgba(199,168,108,0.2); border-radius:8px; transition: background 0.3s ease; }
-#cartItems li:hover { background: rgba(199,168,108,0.08); }
-#cartItems li button { background:#c7a86c; color:#000; border:none; padding:0.4rem 0.8rem; border-radius:6px; cursor:pointer; font-weight:600; transition: all 0.3s ease; }
-#cartItems li button:hover { background:#fff; color:#c7a86c; transform:scale(1.1); }
-.cart-footer { margin-top:1rem; display:flex; flex-direction:column; gap:1rem; }
-#cartTotal { font-weight:700; font-size:1.2rem; color:#c7a86c; text-align:right; border-top:1px solid rgba(199,168,108,0.2); padding-top:0.5rem; }
-#checkoutBtn { background:#c7a86c; color:#000; border:none; padding:0.8rem 1.2rem; border-radius:8px; font-weight:700; cursor:pointer; transition: all 0.3s ease; }
-#checkoutBtn:hover { background:#fff; color:#c7a86c; box-shadow:0 4px 12px rgba(199,168,108,0.4); transform:scale(1.05); }
-footer { text-align:center; padding:2rem 1rem; background:#000; border-top:1px solid rgba(255,255,255,0.04); color:#bbb; margin-top:2rem; }
+  /* MASTER TEMPLATE CSS */
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:'Poppins', sans-serif; background:#0e0e0e; color:#fff; line-height:1.6; padding-top:120px; }
+  header { position:fixed; top:0; left:0; width:100%; background:rgba(0,0,0,0.95); z-index:1000; }
+  .centered-header { display:flex; align-items:center; justify-content:center; padding:1rem 2rem; position:relative; }
+  .brand { position:relative; display:inline-block; cursor:pointer; }
+  .brand img { height:80px; width:auto; border-radius:10px; transition: all 0.4s ease; }
+  .brand:hover img { transform: scale(1.1); box-shadow:0 0 20px #c7a86c; }
 
-/* ===== GLOBAL RESPONSIVE STYLES ===== */
-html, body {
-  max-width: 100%;
-  overflow-x: hidden; /* prevents horizontal scroll */
-}
+  main { max-width:980px; margin:0 auto; padding:2rem 1rem; display:flex; gap:2rem; flex-wrap:wrap; align-items:flex-start; }
+  .product-image { flex:1 1 320px; min-width:260px; }
+  .product-image img { width:100%; max-width:400px; border-radius:14px; display:block; box-shadow:0 8px 30px rgba(0,0,0,0.6); }
+  .product-details { flex:1 1 420px; min-width:260px; }
+  .product-details h1 { font-size:2rem; color:#c7a86c; margin-bottom:0.8rem; letter-spacing:0.5px; }
+  .product-details p.desc { margin-bottom:1rem; color:#e7e7e7; opacity:0.95; }
+  .product-details p.features { margin-bottom:1.25rem; color:#d8d8d8; font-size:0.98rem; }
 
-/* Make images responsive */
-img {
-  max-width: 100%;
-  height: auto;
-  display: block;
-}
+  .price { font-size:1.25rem; font-weight:700; color:#c7a86c; margin-bottom:1rem; }
 
-/* Flexible grid for products and other content */
-.product-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 1rem;
-  justify-items: center;
-}
+  /* SIZE BUTTONS */
+  .size-options { display:flex; gap:0.75rem; margin:1rem 0 1.2rem 0; flex-wrap:wrap; }
+  .size-option { padding:0.6rem 1rem; border:2px solid #c7a86c; border-radius:10px; color:#c7a86c; cursor:pointer; font-weight:700; transition:0.2s; user-select:none; }
+  .size-option:hover { background:#c7a86c; color:#000; }
+  .size-option.active { background:#c7a86c; color:#000; }
 
-/* Flex layout adjustments */
-.centered-header,
-.nav-links,
-.contact-info-footer,
-.cart-item-controls {
-  flex-wrap: wrap;
-}
+  /* BUY NOW BUTTON */
+  .gold-buy-now { display:inline-block; background:#c7a86c; color:#000; padding:0.85rem 1.4rem; border-radius:12px; font-weight:800; text-decoration:none; font-size:1rem; transition:all 0.25s ease; border:none; }
+  .gold-buy-now:hover { transform:translateY(-2px); box-shadow:0 0 18px rgba(199,168,108,0.55); color:#000; }
 
-/* ===== HEADER & NAVIGATION ===== */
-.menu-toggle {
-  display: none;
-}
+  .buy-now-wrapper { position:relative; display:inline-block; }
+  .tooltip { visibility:hidden; opacity:0; width:240px; background:#111; color:#fff; text-align:center; padding:0.6rem 0.75rem; border-radius:8px; position:absolute; bottom:125%; left:50%; transform:translateX(-50%); transition:opacity 0.3s ease; font-size:0.85rem; box-shadow:0 0 12px rgba(199,168,108,0.4); z-index:20; }
+  .buy-now-wrapper:hover .tooltip { visibility:visible; opacity:1; }
 
-.nav-links {
-  display: flex;
-  flex-direction: row;
-  gap: 1rem;
-}
+  .back-to-shop { display:inline-block; background:transparent; color:#c7a86c; border:1px solid #2b2b2b; padding:0.6rem 1rem; border-radius:10px; font-weight:700; text-decoration:none; }
+  .back-to-shop:hover { background:#c7a86c; color:#000; border-color:transparent; }
 
-/* Tablet */
-@media (max-width: 1024px) {
-  .nav-links { 
-    gap: 0.8rem;
-    font-size: 0.95rem;
-  }
-}
+  .meta { margin-top:1.25rem; color:#bdc0bd; font-size:0.92rem; }
 
-/* Mobile */
-@media (max-width: 800px) {
-
-  .menu-toggle { 
-    display: block; 
-  }
-
-  .nav-links {
-    display: none;
-    position: absolute;
-    top: 100%;
-    right: 1rem;
-    background: rgba(0,0,0,0.95);
-    padding: 0.75rem 1rem;
-    border-radius: 8px;
-    flex-direction: column;
-    gap: 0.5rem;
-    width: 200px;
-    z-index: 10000;
-  }
-
-  .nav-links.show {
-    display: flex;
-  }
-
-  .brand img {
-    height: 70px;
-  }
-
-  body {
-    padding-top: 120px;
-  }
-}
-
-/* ===== HERO SECTION ===== */
-.hero {
-  height: 70vh;
-  background-position: center center;
-  background-size: cover;
-}
-
-.hero-content h1 {
-  font-size: clamp(1.5rem, 6vw, 3rem);
-}
-
-.hero-content p {
-  font-size: clamp(0.9rem, 3vw, 1.2rem);
-}
-
-/* ===== CART PANEL ON MOBILE ===== */
-#cartPanel {
-  width: 90%;
-  max-width: 350px;
-}
-
-/* ===== BUTTON SCALING ===== */
-button,
-.notify-btn,
-.add-to-cart {
-  padding: clamp(0.5rem, 2vw, 0.85rem) clamp(1rem, 4vw, 1.5rem);
-  font-size: clamp(0.8rem, 2.5vw, 1rem);
-}
-
+  footer { text-align:center; padding:2rem 1rem; background:#0e0e0e; border-top:1px solid rgba(255,255,255,0.04); color:#bbb; margin-top:2rem; }
+  img { max-width:100%; height:auto; display:block; }
 </style>
 </head>
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-
 <body>
+
 <header>
   <div class="centered-header">
     <a href="index.html" class="brand">
       <img src="WhatsApp Image 2025-10-18 at 8.49.10 AM (1).jpeg" alt="The Nine Ball Logo">
     </a>
-    <button id="cartToggle">🛒 <span id="cart-count">0</span></button>
-    <div id="cartPanel">
-      <div class="cart-header">
-        <h3>Your Cart</h3>
-        <button id="closeCartPanel">×</button>
-      </div>
-      <ul id="cartItems"></ul>
-      <div class="cart-footer">
-        <p id="cartTotal">Total: £0.00</p>
-        <button id="checkoutBtn" onclick="window.location.href='checkout.html'">Checkout</button>
-      </div>
-    </div>
   </div>
 </header>
+
 <main>
   <div class="product-image">
     <img id="productImg" src="nutmeg.jpg" alt="Nutmeg Balm — The Nine Ball">
   </div>
+
   <div class="product-details">
     <h1 id="productName">Nutmeg Balm</h1>
+
     <p class="desc">
       A warm, nutty balm infused with natural nutmeg oil. Perfect for soothing freshly tattooed skin.
     </p>
+
     <p class="features">
       • Gentle, fast-absorbing formula<br>
       • Made with nourishing oils and vitamins<br>
       • Suitable for all skin types and fresh tattoos
     </p>
-    <label for="size">Size</label><br>
-    <select id="productSize" class="size-select">
-      <option value="7" data-ml="60">60ml — £7</option>
-      <option value="10" data-ml="150">150ml — £10</option>
-      <option value="16" data-ml="250">250ml — £16</option>
-    </select>
+
+    <label>Size</label>
+    <div class="size-options">
+      <div class="size-option active" data-price="7" data-link="https://buy.stripe.com/eVq8wRbp11cGfhX7Uj2VG0P">60ml — £7</div>
+      <div class="size-option" data-price="10" data-link="https://buy.stripe.com/3cIeVfgJl6x07Pv8Yn2VG0Q">150ml — £10</div>
+      <div class="size-option" data-price="16" data-link="https://buy.stripe.com/4gMbJ378L1cG6Lr5Mb2VG0R">250ml — £16</div>
+    </div>
+
     <div class="price" id="productPrice">£7.00</div>
+
     <div class="cta-row">
-      <button class="add-to-cart" id="addToCartBtn">ADD TO CART</button>
+      <div class="buy-now-wrapper">
+        <a id="buyNowBtn" href="https://buy.stripe.com/eVq8wRbp11cGfhX7Uj2VG0P" class="gold-buy-now" target="_blank">BUY NOW</a>
+        <span class="tooltip">This will take you to Stripe’s secure checkout to complete your purchase.</span>
+      </div>
       <a href="shop.html" class="back-to-shop">← Back to Shop</a>
     </div>
+
     <div class="meta">
       Ingredients: Shea butter, coconut oil, nutmeg oil, vitamin E, beeswax.<br>
       Store in a cool, dry place. For external use only.
     </div>
   </div>
 </main>
-<!-- FOOTER -->
-<footer style="background:#0e0e0e; color:#bbb; text-align:center; padding:2rem 1rem; border-top:1px solid rgba(255,255,255,0.04);">
+
+<footer>
   <p>&copy; 2025 The Nine Ball. All Rights Reserved.</p>
-  <p>
-    <a href="index.html" style="color:#c7a86c; text-decoration:none; font-weight:600;">Back to Home</a>
-  </p>
+  <p><a href="index.html" style="color:#c7a86c; text-decoration:none; font-weight:600;">Back to Home</a></p>
 </footer>
-<script>
-const menuToggle = document.getElementById('menuToggle');
-const navLinks = document.getElementById('navLinks');
-
-menuToggle.addEventListener('click', () => {
-  navLinks.classList.toggle('show');
-});
-</script>
 
 <script>
-// ENTIRE MASTER TEMPLATE JAVASCRIPT SAME AS Cloves PAGE
-let cart = JSON.parse(localStorage.getItem('cart')) || [];
-const cartToggle = document.getElementById('cartToggle');
-const cartPanel = document.getElementById('cartPanel');
-const closeCartPanel = document.getElementById('closeCartPanel');
-const cartItemsList = document.getElementById('cartItems');
-const cartCount = document.getElementById('cart-count');
-const sizeSelect = document.getElementById('productSize');
-const priceDisplay = document.getElementById('productPrice');
-cartToggle.addEventListener('click', () => cartPanel.classList.toggle('show'));
-closeCartPanel.addEventListener('click', () => cartPanel.classList.remove('show'));
-sizeSelect.addEventListener('change', () => { priceDisplay.textContent = `£${sizeSelect.value}.00`; });
-function updateCartCount() { cartCount.textContent = cart.length; }
-function renderCart() {
-  cartItemsList.innerHTML = '';
-  cart.forEach((item,index)=>{
-    const li=document.createElement('li');
-    li.innerHTML=`<span>${item.name} - £${item.price} (${item.size})</span><button data-index="${index}">Remove</button>`;
-    cartItemsList.appendChild(li);
-  });
-  document.getElementById('cartTotal').textContent=`Total: £${cart.reduce((a,b)=>a+parseFloat(b.price),0).toFixed(2)}`;
-  cartItemsList.querySelectorAll('button').forEach(btn=>{
-    btn.addEventListener('click',e=>{
-      cart.splice(e.target.dataset.index,1);
-      localStorage.setItem('cart',JSON.stringify(cart));
-      updateCartCount();
-      renderCart();
+  // SIZE BUTTON LOGIC
+  const sizeButtons = document.querySelectorAll('.size-option');
+  const priceDisplay = document.getElementById('productPrice');
+  const buyNowBtn = document.getElementById('buyNowBtn');
+
+  sizeButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      sizeButtons.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      priceDisplay.textContent = `£${btn.dataset.price}.00`;
+      buyNowBtn.href = btn.dataset.link;
     });
   });
-}
-function flyToCart(imgSrc,startX,startY){
-  const flyImg=document.createElement('img');
-  flyImg.src=imgSrc;
-  flyImg.style.position='fixed';
-  flyImg.style.left=startX+'px';
-  flyImg.style.top=startY+'px';
-  flyImg.style.width='100px';
-  flyImg.style.height='100px';
-  flyImg.style.transition='all 0.8s ease';
-  flyImg.style.zIndex='3000';
-  document.body.appendChild(flyImg);
-  const cartRect = cartToggle.getBoundingClientRect();
-  setTimeout(()=>{
-    flyImg.style.transform=`translate(${cartRect.left-startX}px, ${cartRect.top-startY}px) scale(0.1)`;
-    flyImg.style.opacity='0';
-  },10);
-  setTimeout(()=>flyImg.remove(),800);
-}
-document.getElementById('addToCartBtn').addEventListener('click',()=>{
-  const item={name:document.getElementById('productName').textContent,price:document.getElementById('productPrice').textContent.replace('£',''),size:document.getElementById('productSize').selectedOptions[0].text};
-  cart.push(item);
-  localStorage.setItem('cart',JSON.stringify(cart));
-  updateCartCount();
-  renderCart();
-  const imgRect=document.getElementById('productImg').getBoundingClientRect();
-  flyToCart(document.getElementById('productImg').src,imgRect.left,imgRect.top);
-});
-updateCartCount();
-renderCart();
 </script>
+
 </body>
 </html>
